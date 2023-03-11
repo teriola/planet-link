@@ -1,9 +1,7 @@
 import Home from "./components/pages/HomePage";
 
-function App() {
+export default function App() {
   return (
     <Home />
   );
 };
-
-export default App

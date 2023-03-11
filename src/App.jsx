@@ -1,6 +1,8 @@
+import Home from "./components/pages/HomePage";
+
 function App() {
   return (
-    <h1 className="font-bold underline">app</h1>
+    <Home />
   );
 };
 

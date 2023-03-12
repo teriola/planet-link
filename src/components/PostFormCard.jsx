@@ -6,7 +6,7 @@ export default function PostFormCard() {
   return (
     <Card>
       <div className="flex gap-3">
-        <Link to="/profile">
+        <Link to="/profile/posts">
           <Avatar />
         </Link>
         <textarea className="grow p-3 h-14" placeholder="What's on your mind?" ></textarea>

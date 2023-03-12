@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/pages/HomePage";
+import HomePage from "./components/pages/HomePage";
 import ProfilePage from "./components/pages/ProfilePage";
 import NavigationCard from "./components/NavigationCard";
 
@@ -12,8 +12,11 @@ export default function App() {
         </div>
         <div className="w-9/12">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/profile/posts" element={<ProfilePage />} />
+            <Route path="/profile/about" element={<ProfilePage />} />
+            <Route path="/profile/friends" element={<ProfilePage />} />
+            <Route path="/profile/photos" element={<ProfilePage />} />
           </Routes>
         </div>
       </div>

@@ -11,13 +11,13 @@ export default function PostCard() {
     <Card>
       <div className="flex gap-3">
         <div>
-          <Link to="/profile" className="cursor-pointer">
+          <Link to="/profile/posts" className="cursor-pointer">
             <Avatar />
           </Link>
         </div>
         <div className="grow">
           <p>
-            <Link to="/profile" className="cursor-pointer font-semibold cursor-pointer hover:underline">Elon Musk</Link>
+            <Link to="/profile/posts" className="cursor-pointer font-semibold cursor-pointer hover:underline">Elon Musk</Link>
             {' '}posted a <a href="#" className="text-blue">photo</a>
           </p>
           <p>

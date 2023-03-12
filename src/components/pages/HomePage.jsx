@@ -1,7 +1,7 @@
 import PostFormCard from "../PostFormCard";
 import PostCard from "../PostCard";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <PostFormCard />

@@ -1,7 +1,10 @@
 export default function Dropdown() {
   return (
     <div className="absolute top-10 right-0 bg-white shadow-md shadow-gray-300 p-3 rounded-sm border-gray-100 w-52">
-      <a href="" className="flex p-3 gap-2">
+      <a
+        href=""
+        className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -18,7 +21,10 @@ export default function Dropdown() {
         </svg>
         Delete
       </a>
-      <a href="" className="flex p-3 gap-2">
+      <a
+        href=""
+        className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -35,7 +41,10 @@ export default function Dropdown() {
         </svg>
         Hide
       </a>
-      <a href="" className="flex p-3 gap-2">
+      <a
+        href=""
+        className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -52,7 +61,10 @@ export default function Dropdown() {
         </svg>
         Bookmark
       </a>
-      <a href="" className="flex p-3 gap-2">
+      <a
+        href=""
+        className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

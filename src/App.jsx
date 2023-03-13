@@ -13,6 +13,7 @@ export default function App() {
         <div className="w-9/12">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/posts" element={<ProfilePage />} />
             <Route path="/profile/about" element={<ProfilePage />} />
             <Route path="/profile/friends" element={<ProfilePage />} />

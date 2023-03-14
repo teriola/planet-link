@@ -1,7 +1,9 @@
+import PostCard from "../../Home/feed/PostCard";
+
 export default function Posts() {
     return (
         <div>
-            posts
+          <PostCard />
         </div>
     );
 };

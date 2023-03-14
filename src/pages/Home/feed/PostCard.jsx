@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Avatar from "./Avatar";
-import Card from "./Card";
+import Avatar from "../../../components/ui/Avatar";
+import Card from "../../../components/ui/Card";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 

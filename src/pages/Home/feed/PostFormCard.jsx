@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Avatar from "./Avatar";
-import Card from "./Card";
+import Avatar from "../../../components/ui/Avatar";
+import Card from "../../../components/ui/Card";
 
 export default function PostFormCard() {
   return (

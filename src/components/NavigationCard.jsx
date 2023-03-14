@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Card from "./Card";
+import Card from "./ui/Card";
 
 export default function NavigationCard() {
   const activeElement = "flex gap-3 py-3 my-1 bg-blue text-white -mx-10 px-10 rounded-md shadow-md shadow-gray-300";

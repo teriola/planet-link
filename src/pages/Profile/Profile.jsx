@@ -1,10 +1,10 @@
-import Card from '../Card';
+import Card from '../../components/ui/Card';
 import { NavLink, useLocation } from 'react-router-dom';
-import Avatar from '../Avatar';
-import Posts from '../profile/Posts';
-import Friends from '../profile/Friends';
-import Photos from '../profile/Photos';
-import About from '../profile/About';
+import Avatar from '../../components/ui/Avatar';
+import Posts from './tabs/Posts';
+import Friends from './tabs/Friends';
+import Photos from './tabs/Photos';
+import About from './tabs/About';
 
 export default function ProfilePage() {
   const activeTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-blue text-blue font-bold';

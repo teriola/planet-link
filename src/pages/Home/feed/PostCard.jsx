@@ -67,7 +67,7 @@ export default function PostCard() {
         </div>
         <div className="border grow rounded-full relative">
           <textarea
-            className="block w-full p-3 px-4 h-12 overflow-hidden rounded-full"
+            className="block w-full p-3 px-4 h-12 overflow-hidden rounded-3xl"
             placeholder="Leave a comment"
           />
           <button className="absolute top-3 right-3 text-gray-400">

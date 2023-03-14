@@ -13,7 +13,7 @@ export default function Login(){
   };
 
   return(
-    <div className="h-screen flex items-center">
+    <div className="h-screen flex items-center mx-4">
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Login</h1>

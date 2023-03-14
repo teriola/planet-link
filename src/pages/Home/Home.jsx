@@ -8,6 +8,22 @@ export default function Home() {
 
       {/* Posts go here: */}
       <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
     </>
   );
 }

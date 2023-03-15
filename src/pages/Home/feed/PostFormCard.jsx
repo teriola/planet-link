@@ -9,7 +9,7 @@ export default function PostFormCard() {
         <Link to="/profile/posts">
           <Avatar />
         </Link>
-        <textarea className="grow p-3 h-14" placeholder="What's on your mind?" ></textarea>
+        <textarea className="grow p-3 h-14 dark:bg-blackbg" placeholder="What's on your mind?" ></textarea>
       </div>
 
       <div className="flex gap-5 items-center mt-2">

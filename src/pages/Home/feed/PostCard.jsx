@@ -65,9 +65,9 @@ export default function PostCard() {
         <div>
           <Avatar />
         </div>
-        <div className="border grow rounded-full relative">
+        <div className="grow rounded-full relative">
           <textarea
-            className="block w-full p-3 px-4 h-12 overflow-hidden rounded-3xl"
+            className="border block w-full p-3 px-4 h-12 overflow-hidden rounded-3xl dark:bg-blackbg dark:border-black"
             placeholder="Leave a comment"
           />
           <button className="absolute top-3 right-3 text-gray-400">

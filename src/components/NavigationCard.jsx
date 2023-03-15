@@ -2,8 +2,7 @@ import { NavLink } from "react-router-dom";
 import Card from "./ui/Card";
 
 export default function NavigationCard() {
-  const activeElement = "text-sm md:text-md flex gap-1 md:gap-3 py-3 my-1 bg-blue text-white md:-mx-7 px-6 md:px-7 rounded-md shadow-md shadow-gray-300 items-center";
-                           "text-sm md:text-md flex gap-1 md:gap-3 py-2 my-2 hover:bg-blue-                 md:-mx-4 px-6 md:px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300 items-center"
+  const activeElement = "text-sm md:text-md flex gap-1 md:gap-3 py-3 my-1 bg-blue text-white md:-mx-7 px-6 md:px-7 rounded-md shadow-md shadow-gray-300 items-center dark:shadow-md dark:shadow-gray-500";
   const nonActiveElement = "text-sm md:text-md flex gap-1 md:gap-3 py-2 my-2 hover:bg-blue hover:text-white md:-mx-4 px-6 md:px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300 items-center";
 
   return (

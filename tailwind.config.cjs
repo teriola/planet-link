@@ -12,10 +12,10 @@ module.exports = {
         whitebg: '#F5F7FB',
         blacktext: '#333',
 
-        blackbg: '#1c1e21',
+        blackbg: '#000',
         whitetext: '#ddd',
 
-        graybg: '#4A4A4A',
+        graybg: '#1c1e21',
       }
     },
   },

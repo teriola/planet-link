@@ -1,28 +1,26 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/ui/Card";
+import { useForm } from "../../hooks/useForm";
+import { register } from "../../services/authService";
 
 export default function Register() {
-  const [formData, setFormData] = useState({
-    username: '',
+  const { onChangeHandler, onSubmit, formData } = useForm({
     firstName: '',
     lastName: '',
-    country: '',
-    city: '',
     password: '',
+    repeatPassword: '',
     email: '',
+  }, async (formData) => {
+    const user = await register(formData);
+    console.log(user);
   });
-
-  const onChangeHandler = (e) => {
-    setFormData(state => ({ ...state, [e.target.name]: e.target.value }));
-  };
 
   return (
     <div className="h-screen flex items-center mx-4">
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Register</h1>
-          <form className="flex flex-col mt-10 mx-12 gap-4">
+          <form className="flex flex-col mt-10 mx-12 gap-4" onSubmit={onSubmit}>
             <div className="flex gap-2">
               <input
                 className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
@@ -59,10 +57,10 @@ export default function Register() {
             />
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
-              name="repeat-password"
+              name="repeatPassword"
               type="password"
               placeholder="Repeat password"
-              value={formData.password}
+              value={formData.repeatPassword}
               onChange={onChangeHandler}
             />
             <input

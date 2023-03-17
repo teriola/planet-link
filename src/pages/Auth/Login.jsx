@@ -1,23 +1,23 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/ui/Card";
+import { useForm } from "../../hooks/useForm";
+import { login } from "../../services/authService";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: '',
+  const { onChangeHandler, onSubmit, formData } = useForm({
     password: '',
+    email: '',
+  }, async (formData) => {
+    const user = await login(formData);
+    console.log(user);
   });
-
-  const onChangeHandler = (e) => {
-    setFormData(state => ({ ...state, [e.target.name]: e.target.value }));
-  };
 
   return (
     <div className="h-screen flex items-center mx-4">
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Login</h1>
-          <form className="flex flex-col mt-10 mx-12 gap-4">
+          <form className="flex flex-col mt-10 mx-12 gap-4" onSubmit={onSubmit}>
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="email"

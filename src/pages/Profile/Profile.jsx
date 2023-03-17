@@ -1,5 +1,5 @@
 import Card from '../../components/ui/Card';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Avatar from '../../components/ui/Avatar';
 import Posts from './tabs/Posts';
 import Friends from './tabs/Friends';
@@ -7,15 +7,15 @@ import Photos from './tabs/Photos';
 import About from './tabs/About';
 
 export default function ProfilePage() {
-  const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';
-  const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
-
   const path = useLocation().pathname;
 
   const isPosts = path.includes('posts');
   const isAbout = path.includes('about');
   const isFriends = path.includes('friends');
   const isPhotos = path.includes('photos');
+
+  const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';
+  const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
 
   return (
     <>

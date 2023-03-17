@@ -1,29 +1,25 @@
 import { Route, Routes } from "react-router-dom";
-import { useState, useEffect } from "react";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import BookmarkedPosts from "./pages/Bookmarks/BookmarkedPosts";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import Layout from "./components/Layout";
+import { useTheme } from "./hooks/useTheme";
+import Settings from "./pages/Settings/Settings";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 export default function App() {
-  const [theme, setTheme] = useState('light');
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-  const themeToggleHandler = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+  const [theme, themeToggleHandler] = useTheme('dark');
+
+  const contextValue = {
+    theme,
+    themeToggleHandler
   };
 
   return (
-    <>
-      <button onClick={themeToggleHandler}>Theme</button>
-      <Layout >
+    <ThemeContext.Provider value={contextValue}>
+      <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile/posts" element={<Profile />} />
@@ -31,11 +27,12 @@ export default function App() {
           <Route path="/profile/friends" element={<Profile />} />
           <Route path="/profile/photos" element={<Profile />} />
           <Route path="/bookmarks" element={<BookmarkedPosts />} />
+          <Route path="/settings" element={<Settings />} />
           {/* not auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-      </Layout >
-    </>
+      </Layout>
+    </ThemeContext.Provider>
   );
 }

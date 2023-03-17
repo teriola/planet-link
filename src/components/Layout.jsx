@@ -3,11 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 export default function Layout({ children }) {
   const path = useLocation().pathname;
-
   const hideNavigation = () => {
-    return path.includes('login') || path.includes('register')
+    return path.includes('login') || path.includes('register');
   };
-
   const generateClasses = () => {
     let classes = '';
 

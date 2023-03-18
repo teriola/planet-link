@@ -10,6 +10,14 @@ export default function Friends() {
         <FriendInfo />
         <FriendInfo />
         <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
+        <FriendInfo />
       </div>
     </Card>
   );

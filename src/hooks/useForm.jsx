@@ -1,13 +1,23 @@
 import { useState } from "react";
+import { validator } from "../utils/validator";
 
 export function useForm(initValues, onSubmitHandler) {
   const [formData, setFormData] = useState(initValues);
+  const [formErrors, setFormErrors] = useState(initValues);
 
   const onChangeHandler = (e) => {
-    setFormData(state => ({ ...state, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setFormData(state => ({ ...state, [name]: value }));
   };
+
+  const validateForm = () => {
+    setFormErrors(validator(formData));
+  };
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     if (onSubmitHandler) {
       onSubmitHandler(formData);
     }
@@ -17,5 +27,7 @@ export function useForm(initValues, onSubmitHandler) {
     onChangeHandler,
     onSubmit,
     formData,
+    formErrors,
+    validateForm
   };
 };

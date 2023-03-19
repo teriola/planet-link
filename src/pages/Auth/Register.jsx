@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
 import Card from "../../components/ui/Card";
 import { useForm } from "../../hooks/useForm";
-import { register } from "../../services/authService";
 
 export default function Register() {
-  const { onChangeHandler, onSubmit, formData } = useForm({
+  const { onChangeHandler, onSubmit, formData, formErrors, validateForm } = useForm({
     firstName: '',
     lastName: '',
     password: '',
     repeatPassword: '',
     email: '',
   }, async (formData) => {
-    const user = await register(formData);
-    console.log(user);
+    console.log(formData);
   });
 
   return (
@@ -20,7 +18,7 @@ export default function Register() {
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Register</h1>
-          <form className="flex flex-col mt-10 mx-12 gap-4" onSubmit={onSubmit}>
+          <form className="flex relative flex-col mt-10 mx-12 gap-5" onSubmit={onSubmit}>
             <div className="flex gap-2">
               <input
                 className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
@@ -29,7 +27,11 @@ export default function Register() {
                 placeholder="First name"
                 value={formData.firstName}
                 onChange={onChangeHandler}
+                onBlur={validateForm}
               />
+              {formErrors.firstName &&
+                <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">{formErrors.firstName}</span>
+              }
               <input
                 className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
                 name="lastName"
@@ -37,7 +39,11 @@ export default function Register() {
                 placeholder="Last name"
                 value={formData.lastName}
                 onChange={onChangeHandler}
+                onBlur={validateForm}
               />
+              {formErrors.lastName &&
+                <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">{formErrors.lastName}</span>
+              }
             </div>
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
@@ -46,7 +52,11 @@ export default function Register() {
               placeholder="Email"
               value={formData.email}
               onChange={onChangeHandler}
+              onBlur={validateForm}
             />
+            {formErrors.email &&
+              <span className="text-sm absolute top-8 left-2 text-red-500">{formErrors.email}</span>
+            }
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="password"
@@ -54,7 +64,11 @@ export default function Register() {
               placeholder="Password"
               value={formData.password}
               onChange={onChangeHandler}
+              onBlur={validateForm}
             />
+            {formErrors.password &&
+              <span className="text-sm absolute bottom-44 left-2 text-red-500">{formErrors.password}</span>
+            }
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="repeatPassword"
@@ -62,7 +76,11 @@ export default function Register() {
               placeholder="Repeat password"
               value={formData.repeatPassword}
               onChange={onChangeHandler}
+              onBlur={validateForm}
             />
+            {formErrors.repeatPassword &&
+              <span className="text-sm absolute top-36 left-2 text-red-500">{formErrors.repeatPassword}</span>
+            }
             <input
               className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
               type="submit"

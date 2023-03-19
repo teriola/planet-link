@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import Card from "../../components/ui/Card";
 import { useForm } from "../../hooks/useForm";
+import { login } from "../../services/authService";
 
 export default function Login() {
   const { onChangeHandler, onSubmit, formData, formErrors, validateForm } = useForm(
     { password: '', email: '', },
-    async (formData) => {
-      console.log(formData);
+    async ({email, password}) => {
+      const user = await login(email, password);
+      console.log(user);
     });
 
   return (

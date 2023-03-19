@@ -13,7 +13,6 @@ async function request(method, path, data) {
 
   try {
     const res = await fetch(baseUrl + path, options);
-
     const data = await res.json();
 
     return data;

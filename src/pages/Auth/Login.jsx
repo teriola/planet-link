@@ -1,44 +1,57 @@
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/ui/Card";
-import { useForm } from "../../hooks/useForm";
 import { login } from "../../services/authService";
 
 export default function Login() {
-  const { onChangeHandler, onSubmit, formData, formErrors, validateForm } = useForm(
-    { password: '', email: '', },
-    async ({email, password}) => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    try {
       const user = await login(email, password);
+      // TODO: Set user to localstorage
+
       console.log(user);
-    });
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="h-screen flex items-center mx-4">
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Login</h1>
-          <form className="flex relative flex-col mt-10 mx-12 gap-6" onSubmit={onSubmit}>
-            {formErrors.email &&
-              <span className="text-sm absolute -top-6 left-2 text-red-500">{formErrors.email}</span>
-            }
+          <form
+            className="flex relative flex-col mt-10 mx-12 gap-6"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {errors.email?.type === 'required' && <span className="text-sm absolute -top-6 left-2 text-red-500">Email is required</span>}
+            {errors.email?.type === 'pattern' && <span className="text-sm absolute -top-6 left-2 text-red-500">Ivalid email</span>}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="email"
-              type="email"
               placeholder="Email"
-              value={formData.email}
-              onChange={onChangeHandler}
-              onBlur={validateForm} />
-            {formErrors.password &&
-              <span className="text-sm absolute top-9 left-2 text-red-500">{formErrors.password}</span>
-            }
+              {...register('email', { required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ })}
+              aria-invalid={errors.email ? 'true' : 'false'}
+            />
+            {errors.password?.type === 'required' && <span className="text-sm absolute top-9 left-2 text-red-500">Password is required</span>}
+            {errors.password?.type === 'minLength' && <span className="text-sm absolute top-9 left-2 text-red-500">Password is too short</span>}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="password"
               type="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={onChangeHandler}
-              onBlur={validateForm} />
+              {...register('password', { required: true, minLength: 6 })}
+              aria-invalid={errors.password ? 'true' : 'false'}
+            />
             <input
               className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
               type="submit"

@@ -1,4 +1,4 @@
-const baseUrl = 'https://planet-link-api.onrender.com';
+const baseUrl = 'http://localhost:5000';
 
 async function request(method, path, data) {
   const options = {
@@ -14,6 +14,10 @@ async function request(method, path, data) {
   try {
     const res = await fetch(baseUrl + path, options);
     const data = await res.json();
+
+    if (!res.ok) {
+      return (data.message);
+    }
 
     return data;
   } catch (err) {

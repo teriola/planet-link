@@ -1,86 +1,95 @@
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/ui/Card";
-import { useForm } from "../../hooks/useForm";
+import { register as registerUser } from "../../services/authService";
 
 export default function Register() {
-  const { onChangeHandler, onSubmit, formData, formErrors, validateForm } = useForm({
-    firstName: '',
-    lastName: '',
-    password: '',
-    repeatPassword: '',
-    email: '',
-  }, async (formData) => {
-    console.log(formData);
-  });
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const { email, password, repeatPassword, firstName, lastName } = data;
+    try {
+      if (password !== repeatPassword) {
+
+      }
+      const user = await registerUser(email, password, firstName, lastName);
+      // TODO: Set user to localstorage
+      console.log(user);
+      navigate('/profile/posts');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
 
   return (
     <div className="h-screen flex items-center mx-4">
       <div className="max-w-md mx-auto grow -mt-24">
         <Card>
           <h1 className="text-3xl font-bold text-gray-400 text-center">Register</h1>
-          <form className="flex relative flex-col mt-10 mx-12 gap-5" onSubmit={onSubmit}>
+          <form className="flex relative flex-col mt-10 mx-12 gap-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex gap-2">
+              {/* First name input and validation */}
+              {errors.firstName?.type === 'required' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is required</span>}
+              {errors.firstName?.type === 'minLength' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is too short</span>}
               <input
                 className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
                 name="firstName"
                 type="text"
                 placeholder="First name"
-                value={formData.firstName}
-                onChange={onChangeHandler}
-                onBlur={validateForm}
+                {...register('firstName', { required: true, minLength: 2 })}
+                aria-invalid={errors.firstName ? 'true' : 'false'}
               />
-              {formErrors.firstName &&
-                <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">{formErrors.firstName}</span>
-              }
+              {/* Last name input and validation */}
+              {errors.lastName?.type === 'required' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is required</span>}
+              {errors.lastName?.type === 'minLength' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is too short</span>}
               <input
                 className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
                 name="lastName"
                 type="text"
                 placeholder="Last name"
-                value={formData.lastName}
-                onChange={onChangeHandler}
-                onBlur={validateForm}
+                {...register('lastName', { required: true, minLength: 2 })}
+                aria-invalid={errors.lastName ? 'true' : 'false'}
               />
-              {formErrors.lastName &&
-                <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">{formErrors.lastName}</span>
-              }
             </div>
+            {/* Email input and validation */}
+            {errors.email?.type === 'required' && <span className="text-sm absolute top-8 left-2 text-red-500">Email is required</span>}
+            {errors.email?.type === 'pattern' && <span className="text-sm absolute top-8 left-2 text-red-500">Ivalid email</span>}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="email"
               type="text"
               placeholder="Email"
-              value={formData.email}
-              onChange={onChangeHandler}
-              onBlur={validateForm}
+              {...register('email', { required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ })}
+              aria-invalid={errors.email ? 'true' : 'false'}
             />
-            {formErrors.email &&
-              <span className="text-sm absolute top-8 left-2 text-red-500">{formErrors.email}</span>
-            }
+            {/* Password input and validation */}
+            {errors.password?.type === 'required' && <span className="text-sm absolute bottom-44 left-2 text-red-500">Password is required</span>}
+            {errors.password?.type === 'minLength' && <span className="text-sm absolute bottom-44 left-2 text-red-500">Password is too short</span>}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="password"
               type="password"
               placeholder="Password"
-              value={formData.password}
-              onChange={onChangeHandler}
-              onBlur={validateForm}
+              {...register('password', { required: true, minLength: 6 })}
+              aria-invalid={errors.password ? 'true' : 'false'}
             />
-            {formErrors.password &&
-              <span className="text-sm absolute bottom-44 left-2 text-red-500">{formErrors.password}</span>
-            }
+            {/* Confirm password validation */}
+            {errors.repeatPassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
+            {/* {errors.repeatPassword?.type === 'minLength' && <span className="text-sm absolute bottom-44 left-2 text-red-500">Password is too short</span>} */}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="repeatPassword"
               type="password"
               placeholder="Repeat password"
-              value={formData.repeatPassword}
-              onChange={onChangeHandler}
-              onBlur={validateForm}
+              {...register('repeatPassword', { required: true })}
+              aria-invalid={errors.repeatPassword ? 'true' : 'false'}
             />
-            {formErrors.repeatPassword &&
-              <span className="text-sm absolute top-36 left-2 text-red-500">{formErrors.repeatPassword}</span>
-            }
             <input
               className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
               type="submit"

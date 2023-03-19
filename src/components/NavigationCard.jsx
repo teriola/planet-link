@@ -7,7 +7,7 @@ export default function NavigationCard() {
 
   return (
     <Card noPadding={true}>
-      <div className="px-4 py-4 flex gap-4 justify-between md:block shadow-md shadow-gray-500 md:shadow-none z-50">
+      <div className="px-4 py-4 flex gap-4 justify-between md:block shadow-md shadow-gray-500 md:shadow-none">
         <h2 className="text-gray-500 font-bold mb-3 md:block hidden">Navigation</h2>
 
         <NavLink to='/' className={({ isActive }) => isActive ? activeElement : nonActiveElement}>

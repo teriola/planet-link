@@ -8,6 +8,7 @@ export default function Register() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm();
 
@@ -25,7 +26,6 @@ export default function Register() {
       console.log(err);
     }
   }
-
 
   return (
     <div className="h-screen flex items-center mx-4">
@@ -81,13 +81,18 @@ export default function Register() {
             />
             {/* Confirm password validation */}
             {errors.repeatPassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
-            {/* {errors.repeatPassword?.type === 'minLength' && <span className="text-sm absolute bottom-44 left-2 text-red-500">Password is too short</span>} */}
+            {errors.repeatPassword?.type === 'validate' && <span className="text-sm absolute bottom-44 left-2 text-red-500"></span>}
             <input
               className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
               name="repeatPassword"
               type="password"
               placeholder="Repeat password"
-              {...register('repeatPassword', { required: true })}
+              {...register('repeatPassword', {
+                required: true, validate: (value) => {
+                  const { password } = getValues();
+                  return password === value || 'Passwords don\'t match';
+                }
+              })}
               aria-invalid={errors.repeatPassword ? 'true' : 'false'}
             />
             <input

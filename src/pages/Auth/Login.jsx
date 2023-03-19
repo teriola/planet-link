@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/ui/Card";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { login } from "../../services/authService";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { userLoginHandler } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -14,10 +16,9 @@ export default function Login() {
   const onSubmit = async (data) => {
     const { email, password } = data;
     try {
+      // Get user and save it in user state
       const user = await login(email, password);
-      // TODO: Set user to localstorage
-
-      console.log(user);
+      userLoginHandler(user);
       navigate('/');
     } catch (err) {
       console.log(err);

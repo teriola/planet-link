@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/" element={<Home />} exact />
           <Route element={<PrivateRoutes />}>
             <Route path="/profile/:id" element={<Profile />}>
-              <Route path="/profile/:id/posts" element={<Posts />} />
+              <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />
               <Route path="friends" element={<Friends />} />
               <Route path="photos" element={<Photos />} />

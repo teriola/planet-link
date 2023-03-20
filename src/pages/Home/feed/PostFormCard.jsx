@@ -13,7 +13,7 @@ export default function PostFormCard() {
         <textarea className="grow p-3 h-14 dark:bg-blackbg" placeholder="What's on your mind?" ></textarea>
       </div>
 
-     <Buttons /> 
+      <Buttons />
 
     </Card>
   );

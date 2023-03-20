@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import BookmarkedPosts from "./pages/Bookmarks/BookmarkedPosts";
@@ -14,15 +14,15 @@ export default function App() {
     <AuthProvider>
       <Layout>
         <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/profile/posts" element={<Profile />} />
-            <Route path="/profile/about" element={<Profile />} />
-            <Route path="/profile/friends" element={<Profile />} />
-            <Route path="/profile/photos" element={<Profile />} />
-            <Route path="/bookmarks" element={<BookmarkedPosts />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
+          {/* <Route element={<PrivateRoutes />}> */}
+          <Route path="/" element={<Home />} exact />
+          <Route path="/profile/:id/posts" element={<Profile />} />
+          <Route path="/profile/:id/about" element={<Profile />} />
+          <Route path="/profile/:id/friends" element={<Profile />} />
+          <Route path="/profile/:id/photos" element={<Profile />} />
+          <Route path="/bookmarks" element={<BookmarkedPosts />} />
+          <Route path="/settings" element={<Settings />} />
+          {/* </Route> */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

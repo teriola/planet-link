@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/ui/Card";
+import { useAuthContext } from "../../contexts/AuthContext";
 import { register as registerUser } from "../../services/authService";
 
 export default function Register() {
@@ -13,15 +14,14 @@ export default function Register() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    const navigate = useNavigate();
+    const { userRegisterHandler } = useAuthContext();
     const { email, password, repeatPassword, firstName, lastName } = data;
     try {
-      if (password !== repeatPassword) {
-
-      }
+      // Get user and save it in user state
       const user = await registerUser(email, password, firstName, lastName);
-      // TODO: Set user to localstorage
-      console.log(user);
-      navigate('/profile/posts');
+      userRegisterHandler(user);
+      navigate(`/profile/${user._id}`);
     } catch (err) {
       console.log(err);
     }

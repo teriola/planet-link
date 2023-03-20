@@ -19,7 +19,7 @@ export default function Login() {
       // Get user and save it in user state
       const user = await login(email, password);
       userLoginHandler(user);
-      navigate('/');
+      navigate(`/profile/${user._id}/posts`);
     } catch (err) {
       console.log(err);
     }

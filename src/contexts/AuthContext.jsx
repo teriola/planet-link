@@ -7,19 +7,26 @@ export function useAuthContext() {
 }
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-
+    const userData = localStorage.getItem('auth');
+    const [user, setUser] = useState(JSON.parse(userData || null));
     const userLoginHandler = (userData) => {
         setUser(userData);
+        localStorage.setItem('auth', JSON.stringify(userData));
     };
     const userRegisterHandler = (userData) => {
         setUser(userData);
+        localStorage.setItem('auth', JSON.stringify(userData));
+    };
+    const userLogoutHandler = () => {
+      setUser(null); 
+      localStorage.removeItem('auth');
     };
 
     const contextValue = {
         user,
         userLoginHandler,
         userRegisterHandler,
+        userLogoutHandler,
     };
 
     return (

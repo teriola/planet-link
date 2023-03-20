@@ -1,4 +1,5 @@
-import PostCard from "../Home/feed/PostCard";
+import PostCard from "../../components/PostCard";
+
 
 export default function BookmarkedPosts (){
   return(

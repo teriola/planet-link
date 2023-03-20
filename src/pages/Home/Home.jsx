@@ -1,4 +1,4 @@
-import PostCard from "./feed/PostCard";
+import PostCard from "../../components/PostCard";
 import PostFormCard from "./feed/PostFormCard";
 
 export default function Home() {
@@ -7,22 +7,6 @@ export default function Home() {
       <PostFormCard />
 
       {/* Posts go here: */}
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
       <PostCard />
     </>
   );

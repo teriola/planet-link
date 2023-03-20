@@ -1,18 +1,20 @@
 import { useState } from "react";
-import Avatar from "../../../components/ui/Avatar";
-import Card from "../../../components/ui/Card";
-import Dropdown from "./Dropdown";
+import Avatar from "./ui/Avatar";
+import Card from "./ui/Card";
+import Dropdown from "../pages/Home/feed/Dropdown";
 import { Link } from "react-router-dom";
+import { ProfileContext } from "../contexts/ProfileContext";
 
 export default function PostCard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const user = {};
 
   return (
     <Card>
       <div className="flex gap-3">
         <div>
           <Link to="/profile/posts" className="cursor-pointer">
-            <Avatar />
+            <Avatar user={user} />
           </Link>
         </div>
         <div className="grow">
@@ -63,7 +65,7 @@ export default function PostCard() {
       </div>
       <div className="flex mt-3 gap-3">
         <div>
-          <Avatar />
+          <Avatar user={user} />
         </div>
         <div className="grow rounded-full">
           <textarea

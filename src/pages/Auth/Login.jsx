@@ -10,6 +10,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm();
 
@@ -19,9 +20,14 @@ export default function Login() {
       // Get user and save it in user state
       const user = await login(email, password);
       userLoginHandler(user);
-      navigate(`/profile/${user._id}/posts`);
+      navigate(`/`);
     } catch (err) {
-      console.log(err);
+      if (err.server) {
+        setError('server', {
+          type: 'server',
+          message: err.message,
+        });
+      }
     }
   }
 
@@ -53,6 +59,7 @@ export default function Login() {
               {...register('password', { required: true, minLength: 6 })}
               aria-invalid={errors.password ? 'true' : 'false'}
             />
+            <span className="text-sm absolute top-24 left-2 text-red-500">{errors.server && errors.server.message}</span>
             <input
               className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
               type="submit"

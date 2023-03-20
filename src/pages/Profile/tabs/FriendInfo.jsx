@@ -1,9 +1,11 @@
 import Avatar from "../../../components/ui/Avatar";
+import { useAuthContext } from "../../../contexts/AuthContext";
 
 export default function FriendInfo({ firstName, lastName, profilePicture }) {
+  const { user } = useAuthContext();
   return (
     <div className="flex gap-2 border-b pb-2 border-gray-300">
-      <Avatar profilePicture={profilePicture} />
+      <Avatar user={user} />
       <div>
         <h3 className="font-bold text-xl">{firstName} {lastName}</h3>
         <div className="text-sm leading-3">5 mutual friends</div>

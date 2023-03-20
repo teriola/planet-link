@@ -6,24 +6,30 @@ import { register as registerUser } from "../../services/authService";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { userRegisterHandler } = useAuthContext();
   const {
     register,
     handleSubmit,
+    setError,
     getValues,
     formState: { errors }
   } = useForm();
 
   const onSubmit = async (data) => {
-    const navigate = useNavigate();
-    const { userRegisterHandler } = useAuthContext();
     const { email, password, repeatPassword, firstName, lastName } = data;
+    if (password !== repeatPassword) return;
     try {
-      // Get user and save it in user state
-      const user = await registerUser(email, password, firstName, lastName);
+      // Get user, save it in user state and redirect
+      const user = await registerUser({ email, password, repeatPassword, firstName, lastName });
       userRegisterHandler(user);
-      navigate(`/profile/${user._id}`);
+      navigate(`/`);
     } catch (err) {
-      console.log(err);
+      if (err.server) {
+        setError('server', {
+          type: 'server',
+          message: err.message,
+        });
+      }
     }
   }
 
@@ -95,6 +101,7 @@ export default function Register() {
               })}
               aria-invalid={errors.repeatPassword ? 'true' : 'false'}
             />
+            <span className="text-sm absolute top-48 left-2 text-red-500">{errors.server && errors.server.message}</span>
             <input
               className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
               type="submit"

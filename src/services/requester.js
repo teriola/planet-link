@@ -1,10 +1,15 @@
-const baseUrl = 'http://localhost:5000';
+const baseUrl = 'http://localhost:4000';
 
 async function request(method, path, data) {
   const options = {
     method,
     headers: {},
   };
+  const userData = localStorage.getItem('auth');
+
+  if (userData) {
+    options.headers['x-auth'] = JSON.parse(userData).accessToken;
+  }
 
   if (data) {
     options.headers['content-type'] = 'application/json';
@@ -16,12 +21,12 @@ async function request(method, path, data) {
     const data = await res.json();
 
     if (!res.ok) {
-      return (data.message);
+      throw ({ server: true, message: data.message });
     }
 
     return data;
   } catch (err) {
-    console.log(err);
+    throw new Error(err.message);
   }
 }
 

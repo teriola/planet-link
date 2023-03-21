@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../../components/ui/Avatar";
 import Card from "../../../components/ui/Card";
 import { useAuthContext } from "../../../contexts/AuthContext";
@@ -8,6 +8,7 @@ import { createPost } from '../../../services/postService';
 
 export default function PostFormCard() {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [postData, setText] = useState({
     text: '',
     picture: '',
@@ -20,6 +21,7 @@ export default function PostFormCard() {
     try {
       const post = await createPost(postData.text, postData.picture, user._id);
       setText({ text: '', picture: '' });
+      naigate('/');
     } catch (err) {
       console.log(err);
     }

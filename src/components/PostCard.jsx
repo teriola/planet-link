@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function PostCard({ post, user }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { firstName, lastName, profilePicture, _id } = post._owner;
+  const { firstName, lastName, profilePicture, _id, createdOn } = post._owner;
   return (
     <Card>
       <div className="flex gap-3">
@@ -21,7 +21,7 @@ export default function PostCard({ post, user }) {
             {' '}posted a <a href="#" className="text-blue">photo</a>
           </p>
           <p>
-            {/* <a className="text-gray-500 text-sm">2 hours ago</a> */}
+            <a className="text-gray-500 text-sm">{createdOn}</a>
           </p>
         </div>
         <button className="text-gray-400" onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -35,8 +35,9 @@ export default function PostCard({ post, user }) {
       </div>
       <div>
         <p className="my-3 text-sm">{post.text}</p>
-        <div className="rounded-md w-full overflow-hidden">
+        <div className="grow rounded-md w-full overflow-hidden">
           <img
+            className="w-full"
             src={post.picture}
             // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpbnFSv2TiYBCO6Atfgeilxj03DIwLjmPFIA&usqp=CAU"
             alt="post"

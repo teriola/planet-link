@@ -27,7 +27,7 @@ export default function App() {
               <Route path="friends" element={<Friends />} />
               <Route path="photos" element={<Photos />} />
             </Route>
-            <Route path="/bookmarks" element={<BookmarkedPosts />} />
+            <Route path="/:id/bookmarks" element={<BookmarkedPosts />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/logout" element={<Logout />} exact />
           </Route>

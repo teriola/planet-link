@@ -11,8 +11,11 @@ export async function getAllPosts() {
 }
 
 export async function getPostsByUser(userId) {
-    console.log(userId);
     const posts = await get(`/posts/user/${userId}`);
-    console.log(posts);
     return posts;
+}
+
+export async function getBookmarksByUser(userId) {
+    const bookmarks = await get(`/users/${userId}/bookmarks`);
+    return bookmarks;
 }

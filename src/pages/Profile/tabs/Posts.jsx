@@ -8,9 +8,7 @@ export default function Posts() {
   const { user } = useProfileContext();
 
   useEffect(() => {
-    console.log(user);
     getPostsByUser(user._id).then((posts) => {
-      console.log(posts);
       setPosts(posts);
     });
   }, []);

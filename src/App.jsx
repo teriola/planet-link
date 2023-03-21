@@ -19,8 +19,8 @@ export default function App() {
     <AuthProvider>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} exact />
           <Route element={<PrivateRoutes />}>
+            <Route path="/" element={<Home />} exact />
             <Route path="/profile/:id" element={<Profile />}>
               <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />

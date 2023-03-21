@@ -1,13 +1,15 @@
 import Card from '../../components/ui/Card';
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useLocation, Link, Outlet, useParams } from 'react-router-dom';
 import Avatar from '../../components/ui/Avatar';
+import { ProfileContext } from '../../contexts/ProfileContext';
 import { useEffect, useState } from 'react';
 import { getUserById } from '../../services/userService';
 
 export default function ProfilePage() {
-  const [user, setUser] = useState({});
-  const id = useParams().id;
   const path = useLocation().pathname;
+  const id = useParams().id;
+  const [user, setUser] = useState({});
+  console.log(user);
 
   useEffect(() => {
     getUserById(id)
@@ -24,7 +26,7 @@ export default function ProfilePage() {
   const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';
   const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
   return (
-    <>
+    <ProfileContext.Provider value={{ user }}>
       <Card noPadding={true}>
         <div className="relative overflow-hidden rounded-md">
           <div className='h-36 overflow-hidden flex justify-center items-center'>
@@ -60,6 +62,6 @@ export default function ProfilePage() {
         </div>
       </Card>
       <Outlet />
-    </>
+    </ProfileContext.Provider>
   );
 }

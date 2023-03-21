@@ -3,27 +3,25 @@ import Avatar from "./ui/Avatar";
 import Card from "./ui/Card";
 import Dropdown from "../pages/Home/feed/Dropdown";
 import { Link } from "react-router-dom";
-import { ProfileContext } from "../contexts/ProfileContext";
 
-export default function PostCard() {
+export default function PostCard({ post, user }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const user = {};
-
+  const { firstName, lastName, profilePicture, _id } = post._owner;
   return (
     <Card>
       <div className="flex gap-3">
         <div>
-          <Link to="/profile/posts" className="cursor-pointer">
-            <Avatar user={user} />
+          <Link to={`/profile/${_id}/posts`} className="cursor-pointer">
+            <Avatar user={{ profilePicture }} />
           </Link>
         </div>
         <div className="grow">
           <p>
-            <Link to="/profile/posts" className="cursor-pointer font-semibold cursor-pointer hover:underline">Elon Musk</Link>
+            <Link to="/profile/posts" className="font-semibold cursor-pointer hover:underline">{firstName} {lastName}</Link>
             {' '}posted a <a href="#" className="text-blue">photo</a>
           </p>
           <p>
-            <a className="text-gray-500 text-sm">2 hours ago</a>
+            {/* <a className="text-gray-500 text-sm">2 hours ago</a> */}
           </p>
         </div>
         <button className="text-gray-400" onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -36,15 +34,11 @@ export default function PostCard() {
         </div>
       </div>
       <div>
-        <p className="my-3 text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ipsam,
-          culpa error repellendus numquam asperiores est, natus omnis amet,
-          voluptas nobis fugiat expedita aliquam at dignissimos corrupti. A,
-          dolorum maiores.
-        </p>
-        <div className="rounded-md overflow-hidden">
+        <p className="my-3 text-sm">{post.text}</p>
+        <div className="rounded-md w-full overflow-hidden">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpbnFSv2TiYBCO6Atfgeilxj03DIwLjmPFIA&usqp=CAU"
+            src={post.picture}
+            // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpbnFSv2TiYBCO6Atfgeilxj03DIwLjmPFIA&usqp=CAU"
             alt="post"
           />
         </div>
@@ -65,7 +59,7 @@ export default function PostCard() {
       </div>
       <div className="flex mt-3 gap-3">
         <div>
-          <Avatar user={user} />
+          <Avatar user={post._owner} />
         </div>
         <div className="grow rounded-full">
           <textarea
@@ -77,6 +71,6 @@ export default function PostCard() {
           </button> */}
         </div>
       </div>
-    </Card>
+    </Card >
   );
 }

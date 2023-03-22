@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Profile from "./pages/Profile/Profile";
-import BookmarkedPosts from "./pages/Bookmarks/BookmarkedPosts";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
-import Layout from "./components/Layout";
-import Settings from "./pages/Settings/Settings";
+import Home from './pages/Home';
+import Profile from "./pages/Profile";
+import Bookmarks from "./pages/Bookmarks";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Layout from "./components/Layout/MainLayout";
+import Settings from "./pages/Settings";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoutes from "./utils/PrivateRoute";
-import Logout from "./pages/Auth/Logout";
-import Posts from "./pages/Profile/tabs/Posts";
-import About from "./pages/Profile/tabs/About";
-import Friends from "./pages/Profile/tabs/Friends";
-import Photos from "./pages/Profile/tabs/Photos";
+import Logout from "./pages/Logout";
+import Posts from "./components/Posts/Posts";
+import About from "./components/About/About";
+import Friends from "./components/Friends/Friends";
+import Photos from "./components/Photos/Photos";
 
 export default function App() {
   return (
@@ -27,7 +27,7 @@ export default function App() {
               <Route path="friends" element={<Friends />} />
               <Route path="photos" element={<Photos />} />
             </Route>
-            <Route path="/:id/bookmarks" element={<BookmarkedPosts />} />
+            <Route path="/:id/bookmarks" element={<Bookmarks />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/logout" element={<Logout />} exact />
           </Route>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Avatar from "../../../components/ui/Avatar";
-import Card from "../../../components/ui/Card";
-import { useAuthContext } from "../../../contexts/AuthContext";
-import Buttons from "./Buttons";
-import { createPost } from '../../../services/postService';
+import Avatar from "../UI/Avatar";
+import Card from "../UI/Card";
+import { useAuthContext } from "../../contexts/AuthContext";
+import Buttons from '../UI/Buttons';
+import { createPost } from '../../services/postService';
 
 export default function PostFormCard() {
   const { user } = useAuthContext();
@@ -20,10 +20,11 @@ export default function PostFormCard() {
   const onSubmitHandler = async () => {
     try {
       const post = await createPost(postData.text, postData.picture, user._id);
+
       setText({ text: '', picture: '' });
-      naigate('/');
+      navigate('/');
     } catch (err) {
-      console.log(err);
+
     }
   };
 

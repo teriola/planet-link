@@ -1,5 +1,5 @@
-import Card from "../../components/ui/Card";
-import { useThemeContext } from "../../contexts/ThemeContext";
+import Card from '../components/UI/Card';
+import { useThemeContext } from "../contexts/ThemeContext";
 
 export default function Settings() {
     const { theme, toggleTheme } = useThemeContext();

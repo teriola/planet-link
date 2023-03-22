@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import Card from "../../../components/ui/Card";
-import { ProfileContext } from "../../../contexts/ProfileContext";
+import Card from "../UI/Card";
+import { ProfileContext } from '../../contexts/ProfileContext';
+
 
 export default function About() {
   const { user } = useContext(ProfileContext);
-  console.log(user);
+  
   return (
     <Card>
       <h2 className="text-3xl mb-2">About me</h2>

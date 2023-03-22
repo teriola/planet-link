@@ -1,8 +1,8 @@
 import FriendInfo from "./FriendInfo";
-import Card from "../../../components/ui/Card";
+import Card from "../UI/Card";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUserFriends } from "../../../services/userService";
+import { getUserFriends } from '../../services/userService';
 
 export default function Friends() {
   const [friends, setFriends] = useState([]);

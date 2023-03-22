@@ -1,4 +1,4 @@
-import NavigationCard from './NavigationCard';
+import NavigationCard from '../Navigation/NavigationCard';
 import { useLocation } from 'react-router-dom';
 
 export default function Layout({ children }) {

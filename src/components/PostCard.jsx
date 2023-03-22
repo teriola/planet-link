@@ -1,12 +1,15 @@
 import { useState } from "react";
-import Avatar from "./ui/Avatar";
-import Card from "./ui/Card";
-import Dropdown from "../pages/Home/feed/Dropdown";
+import { useAuthContext } from "../contexts/AuthContext";
+import Avatar from "./UI/Avatar";
+import Card from "./UI/Card";
+import Dropdown from './UI/Dropdown';
 import { Link } from "react-router-dom";
 
-export default function PostCard({ post, user }) {
+export default function PostCard({ post }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { firstName, lastName, profilePicture, _id, createdOn } = post._owner;
+  const { user } = useAuthContext();
+
   return (
     <Card>
       <div className="flex gap-3">
@@ -60,7 +63,7 @@ export default function PostCard({ post, user }) {
       </div>
       <div className="flex mt-3 gap-3">
         <div>
-          <Avatar user={post._owner} />
+          <Avatar user={user} />
         </div>
         <div className="grow rounded-full">
           <textarea

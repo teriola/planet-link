@@ -10,7 +10,7 @@ export default function Avatar({ size, user }) {
     <div className={`${width} ${height} inline-block rounded-full overflow-hidden`}>
       <img
         className=""
-        src={user?.profilePicture}
+        src={user.profilePicture}
         alt="profile picture" />
     </div>
   );

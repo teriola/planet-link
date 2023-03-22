@@ -1,4 +1,4 @@
-import Card from '../components/UI/Card';
+import Card from '../components/ui/Card';
 import { useThemeContext } from "../contexts/ThemeContext";
 
 export default function Settings() {

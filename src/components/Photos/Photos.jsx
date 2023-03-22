@@ -1,4 +1,4 @@
-import Card from '../UI/Card';
+import Card from '../ui/Card';
 
 export default function Photos() {
   return (

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-import Card from "../UI/Card";
+import Card from "../ui/Card";
 
 export default function NavigationCard() {
   const activeElement = "text-sm md:text-md flex gap-1 md:gap-3 py-3 my-1 bg-blue text-white md:-mx-7 px-6 md:px-7 rounded-md shadow-md shadow-gray-300 items-center dark:shadow-md dark:shadow-gray-500";

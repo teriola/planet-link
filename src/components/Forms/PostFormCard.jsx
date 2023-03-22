@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Avatar from "../UI/Avatar";
-import Card from "../UI/Card";
+import Avatar from "../ui/Avatar";
+import Card from "../ui/Card";
 import { useAuthContext } from "../../contexts/AuthContext";
-import Buttons from '../UI/Buttons';
+import Buttons from '../ui/Buttons';
 import { createPost } from '../../services/postService';
 
 export default function PostFormCard() {

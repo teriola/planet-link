@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuthContext } from "../contexts/AuthContext";
-import Avatar from "./UI/Avatar";
-import Card from "./UI/Card";
-import Dropdown from './UI/Dropdown';
+import Avatar from "./ui/Avatar";
+import Card from "./ui/Card";
+import Dropdown from './ui/Dropdown';
 import { Link } from "react-router-dom";
 
 export default function PostCard({ post }) {

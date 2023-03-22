@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Card from "../UI/Card";
+import Card from "../ui/Card";
 import { ProfileContext } from '../../contexts/ProfileContext';
 
 

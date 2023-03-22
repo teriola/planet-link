@@ -1,4 +1,4 @@
-import Card from '../components/UI/Card';
+import Card from '../components/ui/Card';
 import { useLocation, Link, Outlet, useParams } from 'react-router-dom';
 import Avatar from '../components/ui/Avatar';
 import { ProfileContext } from '../contexts/ProfileContext';

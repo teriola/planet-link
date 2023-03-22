@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Card from "../components/UI/Card"
+import Card from "../components/ui/Card"
 import LoginForm from "../components/Forms/Auth/LoginForm";
 
 export default function Login() {

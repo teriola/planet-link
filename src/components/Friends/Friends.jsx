@@ -1,5 +1,5 @@
 import FriendInfo from "./FriendInfo";
-import Card from "../UI/Card";
+import Card from "../ui/Card";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserFriends } from '../../services/userService';

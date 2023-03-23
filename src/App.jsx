@@ -20,7 +20,7 @@ export default function App() {
       <Layout>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<Home />} exact />
+            <Route path="/" element={<Home />} />
             <Route path="/profile/:id" element={<Profile />}>
               <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />

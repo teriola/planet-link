@@ -38,7 +38,7 @@ export default function LoginForm() {
             {errors.email?.type === 'required' && <span className="text-sm absolute -top-6 left-2 text-red-500">Email is required</span>}
             {errors.email?.type === 'pattern' && <span className="text-sm absolute -top-6 left-2 text-red-500">Ivalid email</span>}
             <input
-                className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext dark:bg-blackbg"
+                className="border rounded-lg px-3 py-1 border-gray-300 dark:bg-blackbg dark:text-gray-400"
                 name="email"
                 placeholder="Email"
                 {...register('email', { required: true, pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ })}
@@ -46,7 +46,7 @@ export default function LoginForm() {
             {errors.password?.type === 'required' && <span className="text-sm absolute top-9 left-2 text-red-500">Password is required</span>}
             {errors.password?.type === 'minLength' && <span className="text-sm absolute top-9 left-2 text-red-500">Password is too short</span>}
             <input
-                className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext dark:bg-blackbg"
+                className="border rounded-lg px-3 py-1 border-gray-300 dark:bg-blackbg dark:text-gray-400"
                 name="password"
                 type="password"
                 placeholder="Password"

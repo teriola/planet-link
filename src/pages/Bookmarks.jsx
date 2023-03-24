@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { getBookmarksByUser } from '../services/postService';
+import Card from "../components/ui/Card";
 
 
 export default function Bookmarks() {
@@ -15,7 +16,7 @@ export default function Bookmarks() {
       <h1 className="text-6xl mb-4 text-gray-400">Bookmarks</h1>
       {bookbarks.length > 0 ?
         bookbarks.map(post => <PostCard key={post._id} post={post} />) :
-        <h3 className="text-2xl text-center pt-4">No bookmarks</h3>
+        <h3 className="text-2xl text-center pt-4 dark:text-gray-500">No bookmarks</h3>
       }
     </>
   );

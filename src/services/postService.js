@@ -4,8 +4,8 @@ export async function getAllPosts() {
     const posts = await get('/posts');
     return posts;
 }
-export async function createPost(text, picture, ownerId) {
-    const Post = await post('/posts', { text, picture, ownerId });
+export async function createPost(text, picture) {
+    const Post = await post('/posts', { text, picture });
     return Post;
 }
 export async function getPostsByUser(userId) {
@@ -13,7 +13,7 @@ export async function getPostsByUser(userId) {
     return posts;
 }
 export async function getBookmarksByUser(userId) {
-    const bookmarks = await get(`/users/bookmark/${userId}`);
+    const bookmarks = await get('/posts/bookmarks');
     return bookmarks;
 }
 export async function likePost(postId) {

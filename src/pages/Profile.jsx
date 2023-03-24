@@ -29,7 +29,7 @@ export default function ProfilePage() {
           </div>
           <div className="p-4 pt-0 md:pt-4 pb-0">
             <div className='ml-28 md:ml-40'>
-              <h1 className='text-3xl font-bold'>{user.firstName} {user.lastName}</h1>
+              <h1 className='text-3xl font-bold'>{user.name} {user.surname}</h1>
               <div className='text-gray-500 leading-4 dark:text-whitetext'></div>
             </div>
             <div className='mt-4 md:mt-10 flex md:gap-0 gap-10 justify-center'>

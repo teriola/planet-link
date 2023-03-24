@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { useTheme } from "../hooks/useTheme";
+import { useAuthContext } from "./AuthContext";
 
 export const ThemeContext = createContext();
 
@@ -8,7 +9,7 @@ export function useThemeContext() {
 }
 
 export function ThemeProvider({ children }) {
-    const [theme, setTheme] = useTheme('light');
+    const [theme, setTheme] = useTheme('dark');
     const toggleTheme = () => setTheme(!theme);
     const contextValue = {
         theme,

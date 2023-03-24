@@ -15,21 +15,22 @@ export default function RegisterForm() {
     } = useForm();
 
     const onSubmit = async (data) => {
-        const { email, password, repeatPassword, firstName, lastName } = data;
-        if (password !== repeatPassword) return;
+        const { email, password, rePassword, name, surname } = data;
+        if (password !== rePassword) return;
 
         try {
-            const user = await registerUser({ email, password, repeatPassword, firstName, lastName });
+            const user = await registerUser({ email, password, rePassword, name, surname });
 
             userRegisterHandler(user);
-            navigate(`/`);
+            navigate(`/profile/${user._id}/posts`);
         } catch (err) {
-            if (err.server) {
-                setError('server', {
-                    type: 'server',
-                    message: err.message,
-                });
-            }
+          console.log(err);
+            // if (err.message) {
+            //     setError('server', {
+            //         type: 'server',
+            //         message: err.message,
+            //     });
+            // }
         }
     }
 
@@ -37,26 +38,26 @@ export default function RegisterForm() {
         <form className="flex relative flex-col mt-10 mx-12 gap-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex gap-2">
                 {/* First name input and validation */}
-                {errors.firstName?.type === 'required' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is required</span>}
-                {errors.firstName?.type === 'minLength' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is too short</span>}
+                {errors.name?.type === 'required' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is required</span>}
+                {errors.name?.type === 'minLength' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Name is too short</span>}
                 <input
                     className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
-                    name="firstName"
+                    name="name"
                     type="text"
                     placeholder="First name"
-                    {...register('firstName', { required: true, minLength: 2 })}
-                    aria-invalid={errors.firstName ? 'true' : 'false'}
+                    {...register('name', { required: true, minLength: 2 })}
+                    aria-invalid={errors.name ? 'true' : 'false'}
                 />
                 {/* Last name input and validation */}
-                {errors.lastName?.type === 'required' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is required</span>}
-                {errors.lastName?.type === 'minLength' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is too short</span>}
+                {errors.surname?.type === 'required' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is required</span>}
+                {errors.surname?.type === 'minLength' && <span className="text-sm absolute -top-6 left-32 md:left-44 text-red-500">Name is too short</span>}
                 <input
                     className="border rounded-lg px-3 py-1 w-1/2 border-gray-300 dark:text-blacktext"
-                    name="lastName"
+                    name="surname"
                     type="text"
                     placeholder="Last name"
-                    {...register('lastName', { required: true, minLength: 2 })}
-                    aria-invalid={errors.lastName ? 'true' : 'false'}
+                    {...register('surname', { required: true, minLength: 2 })}
+                    aria-invalid={errors.surname ? 'true' : 'false'}
                 />
             </div>
             {/* Email input and validation */}
@@ -82,20 +83,20 @@ export default function RegisterForm() {
                 aria-invalid={errors.password ? 'true' : 'false'}
             />
             {/* Confirm password validation */}
-            {errors.repeatPassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
-            {errors.repeatPassword?.type === 'validate' && <span className="text-sm absolute bottom-44 left-2 text-red-500"></span>}
+            {errors.rePassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
+            {errors.rePassword?.type === 'validate' && <span className="text-sm absolute bottom-44 left-2 text-red-500"></span>}
             <input
                 className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
-                name="repeatPassword"
+                name="rePassword"
                 type="password"
                 placeholder="Repeat password"
-                {...register('repeatPassword', {
+                {...register('rePassword', {
                     required: true, validate: (value) => {
                         const { password } = getValues();
                         return password === value || 'Passwords don\'t match';
                     }
                 })}
-                aria-invalid={errors.repeatPassword ? 'true' : 'false'}
+                aria-invalid={errors.rePassword ? 'true' : 'false'}
             />
             <span className="text-sm absolute top-48 left-2 text-red-500">{errors.server && errors.server.message}</span>
             <input

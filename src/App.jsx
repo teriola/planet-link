@@ -13,28 +13,31 @@ import Posts from "./components/Posts/Posts";
 import About from "./components/About/About";
 import Friends from "./components/Friends/Friends";
 import Photos from "./components/Photos/Photos";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 export default function App() {
   return (
     <AuthProvider>
-      <Layout>
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile/:id" element={<Profile />}>
-              <Route path="posts" element={<Posts />} />
-              <Route path="about" element={<About />} />
-              <Route path="friends" element={<Friends />} />
-              <Route path="photos" element={<Photos />} />
+      <ThemeProvider>
+        <Layout>
+          <Routes>
+            <Route element={<PrivateRoutes />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile/:id" element={<Profile />}>
+                <Route path="posts" element={<Posts />} />
+                <Route path="about" element={<About />} />
+                <Route path="friends" element={<Friends />} />
+                <Route path="photos" element={<Photos />} />
+              </Route>
+              <Route path="/:id/bookmarks" element={<Bookmarks />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/logout" element={<Logout />} exact />
             </Route>
-            <Route path="/:id/bookmarks" element={<Bookmarks />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/logout" element={<Logout />} exact />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Layout>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </Layout>
+      </ThemeProvider>
     </AuthProvider >
   );
 }

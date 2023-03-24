@@ -5,8 +5,8 @@ export async function login(email, password) {
   return data;
 };
 
-export async function register({ email, password, repeatPassword, firstName, lastName }) {
-  const data = await post('/users/register', { email, password, repeatPassword, firstName, lastName });
+export async function register({ email, password, rePassword, name, surname }) {
+  const data = await post('/users', { email, password, rePassword, name, surname });
   return data;
 }
 

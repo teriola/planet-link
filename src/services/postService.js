@@ -17,5 +17,10 @@ export async function getBookmarksByUser(userId) {
     return bookmarks;
 }
 export async function likePost(postId) {
-
+    const res = await post(`/posts/${postId}/like`);
+    return res;
+}
+export async function unlikePost(postId) {
+    const res = await post(`/posts/${postId}/unlike`);
+    return res;
 }

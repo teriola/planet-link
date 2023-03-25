@@ -25,12 +25,12 @@ export default function RegisterForm() {
             navigate(`/profile/${user._id}/posts`);
         } catch (err) {
           console.log(err);
-            // if (err.message) {
-            //     setError('server', {
-            //         type: 'server',
-            //         message: err.message,
-            //     });
-            // }
+            if (err.message) {
+                setError('server', {
+                    type: 'server',
+                    message: err.message,
+                });
+            }
         }
     }
 

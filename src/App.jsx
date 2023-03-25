@@ -21,14 +21,14 @@ export default function App() {
       <ThemeProvider>
         <Layout>
           <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile/:id" element={<Profile />}>
+              <Route path="posts" element={<Posts />} />
+              <Route path="about" element={<About />} />
+              <Route path="friends" element={<Friends />} />
+              <Route path="photos" element={<Photos />} />
+            </Route>
             <Route element={<PrivateRoutes />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile/:id" element={<Profile />}>
-                <Route path="posts" element={<Posts />} />
-                <Route path="about" element={<About />} />
-                <Route path="friends" element={<Friends />} />
-                <Route path="photos" element={<Photos />} />
-              </Route>
               <Route path="/:id/bookmarks" element={<Bookmarks />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/logout" element={<Logout />} exact />

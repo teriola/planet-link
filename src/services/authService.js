@@ -11,5 +11,5 @@ export async function register({ email, password, rePassword, name, surname }) {
 }
 
 export async function logout() {
-  get('/users/logout');
+  get ('/users/logout');
 }

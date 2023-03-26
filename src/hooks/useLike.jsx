@@ -1,27 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { likePost, unlikePost } from "../services/postService";
 
-export function useLike(post, initialLikes, userId){
-  const [likes, setLikes] = useState(initialLikes);
-  const [liked, setLiked] = useState(false);
+export function useLike(post, userId){
+  const [likes, setLikes] = useState(post.likes);
+  const [liked, setLiked] = useState(() => {
+    return post.likedUsers.includes(userId);
+  });
 
-  useEffect(() => {
-    const isLiked = post.likedUsers.find(x => x.toString() == userId); 
-    if (isLiked){
-      setLiked(true);
-    }
-  }, []);
-
-  const onLikeClick = () => {
+  const onLikeClick = async () => {
     if(liked){
+      await unlikePost(post._id);
       setLikes(likes => likes - 1);
-      unlikePost(post._id);
     }else{
+      await likePost(post._id);
       setLikes(likes => likes + 1);
-      likePost(post._id);
     }
     setLiked(!liked);
   };
 
-  return { likes, onLikeClick, liked };
+  return { likes, liked, onLikeClick };
 }

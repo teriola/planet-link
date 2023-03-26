@@ -11,6 +11,7 @@ export default function Bookmarks() {
   useEffect(() => {
     getBookmarksByUser(id).then(setBookmarks);
   }, [id]);
+
   return (
     <>
       <h1 className="text-6xl mb-4 text-gray-400">Bookmarks</h1>

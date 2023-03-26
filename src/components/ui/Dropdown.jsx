@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { setBookmark } from "../../services/postService";
 
-export default function Dropdown({ ownerId }) {
+export default function Dropdown({ postId, ownerId }) {
   const { user } = useAuthContext();
+  const [isBookmarked, setIsBookmarked] = useState(() => {
+    return !!user.bookmarks.find(x => x._id == postId );
+  });
 
   return (
     <div className='absolute top-10 right-0 bg-white shadow-md shadow-gray-300 p-3 rounded-md border-gray-100 w-52 dark:bg-blackbg dark:shadow-md dark:shadow-gray-500'>
@@ -25,9 +29,9 @@ export default function Dropdown({ ownerId }) {
     ) : (
       <>
         <Link
-          to={`/${user._id}/bookmarks`}
+          onClick={() => setBookmark(postId)}
           className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300" >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /> </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill={isBookmarked ? 'blue' : 'none'} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /> </svg>
           Bookmark
         </Link>
         <Link

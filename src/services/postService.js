@@ -12,9 +12,12 @@ export async function getPostsByUser(userId) {
     const posts = await get(`/posts/user/${userId}`);
     return posts;
 }
-export async function getBookmarksByUser(userId) {
+export async function getBookmarksByUser() {
     const bookmarks = await get('/posts/bookmarks');
     return bookmarks;
+}
+export async function setBookmark(postId){
+    await post('/posts/bookmarks', { postId });
 }
 export async function likePost(postId) {
     const res = await post(`/posts/${postId}/like`);

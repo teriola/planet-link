@@ -14,7 +14,7 @@ export default function Posts({ isAllPosts }) {
   }, [isAllPosts]);
 
   return (
-    <PostsProvider >
+    <PostsProvider>
       {posts.length > 0 ?
         posts.map(post => <PostCard key={post._id} post={post} />) :
         <h3 className="text-2xl text-center pt-4 dark:text-gray-400">No posts</h3>

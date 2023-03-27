@@ -1,4 +1,4 @@
-import { post, get } from "./requester";
+import { post, get, remove } from "./requester";
 
 export async function getAllPosts() {
     const posts = await get('/posts');
@@ -26,4 +26,8 @@ export async function likePost(postId) {
 export async function unlikePost(postId) {
     const res = await post(`/posts/${postId}/unlike`);
     return res;
+}
+export async function deletePost(postId) {
+    const post = await remove(`/posts/${postId}`);
+    return post;
 }

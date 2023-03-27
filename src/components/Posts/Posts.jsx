@@ -20,7 +20,7 @@ export default function Posts({ isAllPosts }) {
     setPosts(state => state.filter(x => x._id !== id));
   };
   const onAddPostHandler = async () => {
-
+    setPosts(state => [...state, ])
   };
   const contextValue = {
     onDeleteHandler,

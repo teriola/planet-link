@@ -1,31 +1,17 @@
-import { useState } from 'react';
-import PostFormCard from '../components/Forms/PostFormCard';
-import Posts from "../components/Posts/Posts";
-import { useAuthContext } from '../contexts/AuthContext';
-import { HomeContext } from '../contexts/HomeContext';
-import { createPost } from '../services/postService';
+import PostFormCard from "../components/Forms/PostFormCard";
+import PostCard from "../components/PostCard";
+import { useAuthContext } from "../contexts/AuthContext";
+import { usePostsContext } from "../contexts/PostsContext";
 
 export default function Home() {
   const { user } = useAuthContext();
-  const [newPost, setNewPost] = useState();
-
-  const onSubmitHandler = async (postData) => {
-    try {
-      const post = await createPost(postData.text, postData.picture, user._id);
-      setNewPost(post);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const contextValue = {
-    newPost,
-  };
+  const { posts } = usePostsContext();
 
   return (
-    <HomeContext.Provider value={contextValue}>
-      {user.accessToken ? <PostFormCard onSubmitHandler={onSubmitHandler} /> : null}
-      <Posts isAllPosts={true} userId={null} />
-    </HomeContext.Provider>
+    <>
+      {user.accessToken ? <PostFormCard  /> : null}
+      {posts?.length > 0 ? posts.map(post => <PostCard key={post._id} post={post} />) : 
+      <h3 className="text-2xl text-center pt-4 dark:text-gray-400">No posts</h3>}
+    </>
   );
 }

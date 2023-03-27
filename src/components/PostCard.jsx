@@ -6,18 +6,20 @@ import Dropdown from './ui/Dropdown';
 import { Link } from "react-router-dom";
 import { useLike } from "../hooks/useLike";
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import { usePostsContext } from "../contexts/PostsContext";
 
 export default function PostCard({ post }) {
-  const { onDeleteHandler } = usePostsContext();
+  // Get logged in user
   const { user } = useAuthContext();
+
+  // Destructure data from post's owner
+  const { name, surname, profilePicture, _id, createdOn } = post._owner;
+
   // Dropdown menu on post
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [btnRef] = useOutsideClick(setDropdownOpen);
+
   // Manage likes
   const { likes, liked, onLikeClick } = useLike(post, user._id);
-  // Destructure data from post's owner
-  const { name, surname, profilePicture, _id, createdOn } = post._owner;
 
   return (
     <Card>
@@ -42,7 +44,7 @@ export default function PostCard({ post }) {
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
             </button>
             <div className="relative">
-              {dropdownOpen && <Dropdown onDeleteHandler={onDeleteHandler} postId={post._id} ownerId={post._owner._id} />}
+              {dropdownOpen && <Dropdown postId={post._id} ownerId={post._owner._id} />}
             </div>
           </>
         ) : null}

@@ -1,35 +1,32 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Avatar from "../ui/Avatar";
 import Card from "../ui/Card";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Buttons from '../ui/Buttons';
-import { createPost } from '../../services/postService';
+import { usePostsContext } from "../../contexts/PostsContext";
 
-export default function PostFormCard({ onSubmitHandler }) {
+export default function PostFormCard() {
+  // Get logged in user
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+
+  // Handle form data
   const [postData, setText] = useState({
     text: '',
     picture: '',
   });
-
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setText(state => ({ ...state, [name]: value }))
   };
 
-  const onCreatePost = async () => {
-    await onSubmitHandler(postData);
-
-    navigate('/');
-  };
-
+  // Get callbacks to manage post submit
+  const { onAddPostHandler } = usePostsContext(); 
 
   return (
     <Card>
       <div className="flex gap-3">
-        <Link to={`/profile/${user?._id}/`}>
+        <Link to={`/profile/${user?._id}/posts`}>
           <Avatar user={user} />
         </Link>
         <textarea
@@ -39,7 +36,16 @@ export default function PostFormCard({ onSubmitHandler }) {
           className="grow p-3 h-14 dark:bg-blackbg"
           placeholder="What's on your mind?" ></textarea>
       </div>
-      <Buttons picture={postData.picture} onChangeHandler={onChangeHandler} onSubmitHandler={onCreatePost} />
+    <div className="flex mt-2 gap-2">
+        <Buttons picture={postData.picture} onChangeHandler={onChangeHandler} />
+        <div className="text-right">
+            <button
+                onClick={() => onAddPostHandler(postData)}
+                className="bg-blue text-white px-6 py-1 rounded-md">
+                Post
+            </button>
+        </div>
+    </div>
     </Card>
   );
 }

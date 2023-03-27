@@ -2,13 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { setBookmark } from "../../services/postService";
+import { usePostsContext } from "../../contexts/PostsContext";
 
-export default function Dropdown({ postId, ownerId, onDeleteHandler }) {
+export default function Dropdown({ postId, ownerId }) {
   const { user } = useAuthContext();
   const [isBookmarked, setIsBookmarked] = useState(() => {
     const bookmarked = !!user.bookmarks.find(x => x._id == postId);
-    console.log(bookmarked);
   });
+
+  const { onDeleteHandler } = usePostsContext();
 
 
   return (

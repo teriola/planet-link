@@ -14,6 +14,7 @@ import About from "./components/About/About";
 import Friends from "./components/Friends/Friends";
 import Photos from "./components/Photos/Photos";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { PostsProvider } from "./contexts/PostsContext";
 
 export default function App() {
   return (
@@ -21,7 +22,11 @@ export default function App() {
       <ThemeProvider>
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />} />
+              <Route path="/" element={
+                <PostsProvider>
+                  <Home />
+                </PostsProvider>
+              }/>
             <Route path="/profile/:id" element={<Profile />}>
               <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />

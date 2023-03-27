@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const { id } = useParams();
 
   useEffect(() => {
-    getUserById(id).then(setUser);
+    getUserById(id).then(setUser); 
   }, [id]);
 
   const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';

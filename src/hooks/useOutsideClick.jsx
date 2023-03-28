@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 
-export function useOutsideClick(setDropDownOpen){
+export function useOutsideClick(setState){
   const elementRef = useRef();
 
   useEffect(() => {
     const onClick = (e) => {
       if (!elementRef.current?.contains(e.target)){
-        setDropDownOpen(false);
+        setState(false);
       } 
     };
 

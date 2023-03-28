@@ -1,4 +1,4 @@
-export default function Avatar({ size, user }) {
+export default function Avatar({ size, user, isEditing }) {
   let width = 'w-12';
   let height = 'h-12';
   if (size === 'lg') {

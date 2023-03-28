@@ -3,34 +3,80 @@ import { useLocation, Link, Outlet, useParams } from 'react-router-dom';
 import Avatar from '../components/ui/Avatar';
 import { ProfileContext } from '../contexts/ProfileContext';
 import { useEffect, useState } from 'react';
-import { getUserById } from '../services/userService';
+import { getUserById, patchUser } from '../services/userService';
+import { useAuthContext } from '../contexts/AuthContext';
 
 export default function ProfilePage() {
-  const [user, setUser] = useState({});
+  const [currentUser, setUser] = useState({});
+  const { user } = useAuthContext();
   const path = useLocation().pathname;
   const { id } = useParams();
 
+  const [isEditing, setIsEditing] = useState();
+  const [coverPicture, setCoverPicture] = useState('');
+  const onChangeHandler = (e) => {
+    setCoverPicture(e.target.value);
+  };
+  const onEditCoverSubmit = async () => {
+    setUser(state => ({ ...state, coverPicture: coverPicture }));
+    patchUser(user._id, { coverPicture });
+    setIsEditing(false);
+  };
+
+  const onEditButtonClick = async () => {
+    // const newUser = await editUser(user._id); 
+    // console.log(newUser);
+  };
+
   useEffect(() => {
-    getUserById(id).then(setUser); 
+    getUserById(id).then((user) => {
+      setUser(user);
+      setCoverPicture(user.coverPicture);
+    });
   }, [id]);
+
+
 
   const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';
   const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
 
+  const isEditingClass = 'h-36 overflow-hidden flex justify-center items-center relative opacity-60';
+  const notEditingClass = 'h-36 overflow-hidden flex justify-center items-center relative';
+
   return (
-    <ProfileContext.Provider value={{ user }}>
+    <ProfileContext.Provider value={{ user: currentUser }}>
       <Card noPadding={true}>
         <div className="relative overflow-hidden rounded-md">
-          <div className='h-36 overflow-hidden flex justify-center items-center'>
-            <img src={user.coverPicture} />
+          <div className={isEditing ? isEditingClass : notEditingClass}>
+            {isEditing ?
+              <>
+                <input
+                  value={coverPicture}
+                  onChange={onChangeHandler}
+                  name='text'
+                  className="text-black absolute rounded-md w-1/2 bottom-12 right-4 px-3 pr-8 py-2 bg-gray-100 dark:bg-blackbg"
+                  placeholder="https://" >
+                </input>
+                <svg onClick={onEditCoverSubmit} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 absolute right-4 bottom-14 cursor-pointer"> <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /> </svg>
+              </>
+              : null}
+            <img src={currentUser.coverPicture} />
+            <button className='absolute bottom-2 right-2 px-2 py-1 bg-white rounded' onClick={() => setIsEditing(!isEditing)}>Edit cover picture</button>
           </div>
           <div className="absolute top-24 left-4">
-            <Avatar user={user} size='lg' />
+            <Avatar user={currentUser} size='lg' />
           </div>
           <div className="p-4 pt-0 md:pt-4 pb-0">
             <div className='ml-28 md:ml-40'>
-              <h1 className='text-3xl font-bold'>{user.name} {user.surname}</h1>
+              <h1 className='text-3xl font-bold'>{currentUser.name} {currentUser.surname}</h1>
               <div className='text-gray-500 leading-4 dark:text-whitetext'></div>
+
+              {/* OWNER */}
+              {user._id == currentUser._id ?
+                <div className='absolute right-4 bottom-24 cursor-pointer' onClick={onEditButtonClick}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"> <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /> </svg>
+                </div> : null}
+
             </div>
             <div className='mt-4 md:mt-10 flex md:gap-0 gap-10 justify-center'>
               <Link to="posts" className={path.includes('posts') ? activeTab : nonActiveTab}>

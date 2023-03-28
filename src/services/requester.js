@@ -1,4 +1,4 @@
-const baseUrl = 'https://planet-link-api.onrender.com';
+const baseUrl = 'http://localhost:5000';
 
 async function request(method, path, data) {
   const options = {
@@ -34,3 +34,4 @@ export const get = request.bind(null, 'GET');
 export const post = request.bind(null, 'POST');
 export const remove = request.bind(null, 'DELETE');
 export const put = request.bind(null, 'PUT');
+export const patch = request.bind(null, 'PATCH');

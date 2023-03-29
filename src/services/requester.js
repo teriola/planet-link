@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5000';
+const baseUrl = 'https://planet-link-api.onrender.com';
 
 async function request(method, path, data) {
   const options = {

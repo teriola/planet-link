@@ -22,11 +22,11 @@ export default function App() {
       <ThemeProvider>
         <Layout>
           <Routes>
-              <Route path="/" element={
-                <PostsProvider>
-                  <Home />
-                </PostsProvider>
-              }/>
+            <Route path="/" element={
+              <PostsProvider>
+                <Home />
+              </PostsProvider>
+            } />
             <Route path="/profile/:id" element={<Profile />}>
               <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />

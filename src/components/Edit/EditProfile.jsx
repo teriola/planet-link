@@ -3,7 +3,7 @@ import { useProfileContext } from "../../contexts/ProfileContext";
 import { useForm } from "react-hook-form";
 import { patchUser } from "../../services/userService";
 
-export default function Edit({ onCloseEdit, onEditHandler }) {
+export default function EditProfile({ onCloseEdit, onEditHandler }) {
   const { user } = useProfileContext();
   const {
     register,

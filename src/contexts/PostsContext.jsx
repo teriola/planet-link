@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createPost, getAllPosts } from "../services/postService";
+import { createPost, editPost, getAllPosts } from "../services/postService";
 import { deletePost } from "../services/postService";
 
 export const PostsContext = createContext();
@@ -13,8 +13,8 @@ export const PostsProvider = ({ children }) => {
   useEffect(() => {
     getAllPosts()
       .then(posts => {
-      setPosts(posts.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
-    });
+        setPosts(posts.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+      });
   }, []);
 
   // Create new post 
@@ -27,14 +27,20 @@ export const PostsProvider = ({ children }) => {
     const { id } = await deletePost(postId);
     setPosts(state => state.filter(x => x._id !== id));
   };
+  // Edit post
+  const onEditPostHandler = async (postId, data) => {
+    const editedPost = await editPost(postId, data);
+    setPosts(state => state.map(x => x._id == postId ? editedPost : x));
+  };
 
   const contextValue = {
     onAddPostHandler,
     onDeleteHandler,
+    onEditPostHandler,
     posts,
   };
-  
-  return(
+
+  return (
     <PostsContext.Provider value={contextValue}>
       {children}
     </PostsContext.Provider>

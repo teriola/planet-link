@@ -1,4 +1,4 @@
-import { post, get, remove } from "./requester";
+import { post, get, remove, put } from "./requester";
 
 export async function getAllPosts() {
     const posts = await get('/posts');
@@ -16,7 +16,7 @@ export async function getBookmarksByUser() {
     const bookmarks = await get('/posts/bookmarks');
     return bookmarks;
 }
-export async function setBookmark(postId){
+export async function setBookmark(postId) {
     await post('/posts/bookmarks', { postId });
 }
 export async function likePost(postId) {
@@ -30,4 +30,8 @@ export async function unlikePost(postId) {
 export async function deletePost(postId) {
     const post = await remove(`/posts/${postId}`);
     return post;
+}
+export async function editPost(postId, data) {
+    const editedPost = await put(`/posts/${postId}`, data);
+    return editedPost;
 }

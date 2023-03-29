@@ -11,17 +11,21 @@ export default function PostFormCard() {
   const { user } = useAuthContext();
 
   // Handle form data
-  const [postData, setText] = useState({
+  const [postData, setPostData] = useState({
     text: '',
     picture: '',
   });
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setText(state => ({ ...state, [name]: value }))
+    setPostData(state => ({ ...state, [name]: value }))
   };
 
   // Get callbacks to manage post submit
-  const { onAddPostHandler } = usePostsContext(); 
+  const { onAddPostHandler } = usePostsContext();
+  const onSubmit = (postData) => {
+    setPostData({ text: '', picture: '' });
+    onAddPostHandler(postData);
+  };
 
   return (
     <Card>
@@ -36,16 +40,16 @@ export default function PostFormCard() {
           className="grow p-3 h-14 dark:bg-blackbg"
           placeholder="What's on your mind?" ></textarea>
       </div>
-    <div className="flex mt-2 gap-2">
+      <div className="flex mt-2 gap-2">
         <Buttons picture={postData.picture} onChangeHandler={onChangeHandler} />
         <div className="text-right">
-            <button
-                onClick={() => onAddPostHandler(postData)}
-                className="bg-blue text-white px-6 py-1 rounded-md">
-                Post
-            </button>
+          <button
+            onClick={() => onSubmit(postData)}
+            className="bg-blue text-white px-6 py-1 rounded-md">
+            Post
+          </button>
         </div>
-    </div>
+      </div>
     </Card>
   );
 }

@@ -5,7 +5,7 @@ import { ProfileContext } from '../contexts/ProfileContext';
 import { useEffect, useState } from 'react';
 import { getUserById } from '../services/userService';
 import { useAuthContext } from '../contexts/AuthContext';
-import Edit from '../components/Edit/Edit';
+import EditProfile from '../components/Edit/EditProfile';
 
 export default function ProfilePage() {
   const [currentUser, setUser] = useState({});
@@ -31,7 +31,7 @@ export default function ProfilePage() {
     <ProfileContext.Provider value={{ user: currentUser }}>
       {isEditing ? (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75'>
-          <Edit onEditHandler={onEditHandler} onCloseEdit={setIsEditing} oldUserData={currentUser} />
+          <EditProfile onEditHandler={onEditHandler} onCloseEdit={setIsEditing} oldUserData={currentUser} />
         </div>
       ) : null}
 

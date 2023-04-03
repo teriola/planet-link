@@ -1,18 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { setBookmark } from "../../services/postService";
+import { removeBookmark, setBookmark } from "../../services/postService";
 import { usePostsContext } from "../../contexts/PostsContext";
 import { useHomeContext } from "../../contexts/HomeContext";
 
 export default function Dropdown({ children, postId, ownerId, onEditHandler }) {
   const { user } = useAuthContext();
   const [isBookmarked, setIsBookmarked] = useState(() => {
-    const bookmarked = !!user.bookmarks.find(x => x._id == postId);
+    const bookmarked = user?.bookmarks.includes(postId);
     return bookmarked;
   });
 
-  const { setIsEditing } = useHomeContext();
   const { onDeleteHandler, posts } = usePostsContext();
 
 
@@ -36,19 +35,27 @@ export default function Dropdown({ children, postId, ownerId, onEditHandler }) {
         </>
       ) : (
         <>
-          {isBookmarked ?
+          {!isBookmarked ?
             <Link
-              //onClick={() => setBookmark(postId)}
+              onClick={() => setBookmark(postId)}
               className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300" >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /> </svg>
               Bookmark
-            </Link> : null}
+            </Link> : 
+            <Link
+              onClick={() => removeBookmark(postId)}
+              className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300" >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /> </svg>
+              Unbookmark
+            </Link>}
+          {/* 
           <Link
             to="/report"
             className="flex gap-3 py-2 my-2 hover:bg-blue hover:text-white -mx-4 px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" > <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /> </svg>
             Report
-          </Link>
+          </Link> 
+          */}
         </>
       )}
     </div>

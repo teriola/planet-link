@@ -2,24 +2,28 @@ import { useNavigate } from "react-router";
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
 import { login } from '../../../services/authService';
+import { useState } from "react";
 
 export default function LoginForm() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const { userLoginHandler } = useAuthContext();
     const {
         register,
         handleSubmit,
         setError,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm();
 
     const onSubmit = async (data) => {
+        setIsLoading(true);
         const { email, password } = data;
 
         try {
             const user = await login(email, password);
 
             userLoginHandler(user);
+            setIsLoading(false);
             navigate(`/`);
         } catch (err) {
             if (err.message) {
@@ -30,6 +34,7 @@ export default function LoginForm() {
             }
         }
     }
+
 
     return (
         <form
@@ -56,7 +61,8 @@ export default function LoginForm() {
             <input
                 className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
                 type="submit"
-                value="Login" />
+                disabled={isSubmitting || isLoading}
+                value={isLoading ? "Logging in..." : "Login"} />
         </form>
     );
 };

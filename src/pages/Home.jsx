@@ -5,40 +5,40 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { usePostsContext } from "../contexts/PostsContext";
 import { HomeContext } from "../contexts/HomeContext";
 import EditPost from "../components/Edit/EditPost";
-import { useLoadingContext } from "../contexts/LoadingContext";
 import Loading from "../components/ui/Loading";
 
 export default function Home() {
-  const { showLoading, hideLoading, loading } = useLoadingContext();
-  const { user } = useAuthContext();
+    const { user } = useAuthContext();
 
-  const { posts, onEditPostHandler } = usePostsContext();
-  const [isEditing, setIsEditing] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+    const { posts, onEditPostHandler, setIsLoading, isLoading } = usePostsContext();
+    const [isEditing, setIsEditing] = useState(false);
+    const [selectedPost, setSelectedPost] = useState(null);
 
-  const onEditHandler = (post) => {
-    setIsEditing(true);
-    setSelectedPost(post);
-  };
+    const onEditHandler = (post) => {
+        setIsEditing(true);
+        setSelectedPost(post);
+    };
 
-  const onEditSubmitHandler = (data) => {
-    showLoading();
-    onEditPostHandler(selectedPost._id, data);
-    setIsEditing(false);
-    setSelectedPost(null);
-    hideLoading();
-  };
+    const onEditSubmitHandler = (data) => {
+        setIsLoading(true);
 
-  return (
-    <HomeContext.Provider value={{ onEditHandler, setIsEditing, selectedPost }}>
-      {isEditing &&
-        <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75'>
-          <EditPost onEditSubmitHandler={onEditSubmitHandler} onCloseEdit={setIsEditing} />
-        </div>}
-      {user.accessToken ? <PostFormCard /> : null}
-      {loading ? <Loading /> :
-        posts?.length > 0 ? posts.map(post => <PostCard key={post._id} onEditPostHandler={onEditHandler} post={post} />) :
-          <h3 className="text-2xl text-center pt-4 dark:text-gray-400">No posts</h3>}
-    </HomeContext.Provider>
-  );
+        onEditPostHandler(selectedPost._id, data);
+        setIsEditing(false);
+        setSelectedPost(null);
+
+        setIsLoading(false);
+    };
+
+    return (
+        <HomeContext.Provider value={{ onEditHandler, setIsEditing, selectedPost }}>
+        {isEditing &&
+            <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75'>
+            <EditPost onEditSubmitHandler={onEditSubmitHandler} onCloseEdit={setIsEditing} />
+            </div>}
+        {user.accessToken ? <PostFormCard /> : null}
+        {isLoading ? <Loading /> :
+                posts?.length > 0 ? posts.map(post => <PostCard key={post._id} onEditPostHandler={onEditHandler} post={post} />) :
+                <h3 className="text-2xl text-center pt-4 dark:text-gray-400">No posts</h3>}
+        </HomeContext.Provider>
+    );
 }

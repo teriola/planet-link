@@ -2,26 +2,30 @@ import { useNavigate } from "react-router";
 import { useAuthContext } from "../../../contexts/AuthContext";
 import { useForm } from "react-hook-form";
 import { register as registerUser } from "../../../services/authService";
+import { useState } from "react";
 
 export default function RegisterForm() {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const { userRegisterHandler } = useAuthContext();
     const {
         register,
         handleSubmit,
         setError,
         getValues,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm();
 
     const onSubmit = async (data) => {
         const { email, password, rePassword, name, surname } = data;
+        setIsLoading(true);
         if (password !== rePassword) return;
 
         try {
             const user = await registerUser({ email, password, rePassword, name, surname });
 
             userRegisterHandler(user);
+            setIsLoading(false);
             navigate(`/profile/${user._id}/posts`);
         } catch (err) {
           console.log(err);
@@ -102,8 +106,8 @@ export default function RegisterForm() {
             <input
                 className="bg-blue text-white px-6 py-1 rounded-md my-4 cursor-pointer"
                 type="submit"
-                value="Register"
-            />
+                disabled={isSubmitting || isLoading}
+                value={isLoading ? "Registering..." : "Register"} />
         </form>
     );
 };

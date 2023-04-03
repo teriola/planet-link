@@ -19,6 +19,9 @@ export async function getBookmarksByUser() {
 export async function setBookmark(postId) {
     await post('/posts/bookmarks', { postId });
 }
+export async function removeBookmark(postId) {
+    await remove('/posts/bookmarks', { postId });
+}
 export async function likePost(postId) {
     const res = await post(`/posts/${postId}/like`);
     return res;

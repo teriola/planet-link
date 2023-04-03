@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import { getUserById } from '../services/userService';
 import { useAuthContext } from '../contexts/AuthContext';
 import EditProfile from '../components/Edit/EditProfile';
+import Loading from '../components/ui/Loading';
 
 export default function ProfilePage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setUser] = useState({});
   const { user } = useAuthContext();
   const path = useLocation().pathname;
@@ -15,6 +17,7 @@ export default function ProfilePage() {
   useEffect(() => {
     getUserById(id).then((user) => {
       setUser(user);
+      setIsLoading(false);
     });
   }, [id]);
 
@@ -28,7 +31,7 @@ export default function ProfilePage() {
   const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
 
   return (
-    <ProfileContext.Provider value={{ user: currentUser }}>
+    <ProfileContext.Provider value={{ user: currentUser, isLoading, setIsLoading }}>
       {isEditing ? (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75'>
           <EditProfile onEditHandler={onEditHandler} onCloseEdit={setIsEditing} oldUserData={currentUser} />
@@ -38,10 +41,10 @@ export default function ProfilePage() {
       <Card noPadding={true}>
         <div className="relative overflow-hidden rounded-md">
           <div className='h-36 overflow-hidden flex justify-center items-center relative'>
-            <img src={currentUser.coverPicture} />
+            {isLoading ? null : <img src={currentUser.coverPicture} />}
           </div>
           <div className="absolute top-24 left-4">
-            <Avatar user={currentUser} size='lg' />
+            {isLoading ? null : <Avatar user={currentUser} size='lg' />} 
           </div>
           <div className="p-4 pt-0 md:pt-4 pb-0">
             <div className='ml-28 md:ml-40'>

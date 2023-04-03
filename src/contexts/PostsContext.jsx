@@ -10,10 +10,13 @@ export const usePostsContext = () => {
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     getAllPosts()
       .then(posts => {
         setPosts(posts.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+        setIsLoading(false); 
       });
   }, []);
 
@@ -37,6 +40,8 @@ export const PostsProvider = ({ children }) => {
     onAddPostHandler,
     onDeleteHandler,
     onEditPostHandler,
+    isLoading,
+    setIsLoading,
     posts,
   };
 

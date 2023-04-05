@@ -38,3 +38,7 @@ export async function editPost(postId, data) {
     const editedPost = await put(`/posts/${postId}`, data);
     return editedPost;
 }
+export async function getComments(postId) {
+    const comments = await get(`/posts/${postId}/comments`);
+    return comments;
+}

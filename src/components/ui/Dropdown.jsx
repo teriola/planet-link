@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { removeBookmark, setBookmark } from "../../services/postService";
 import { usePostsContext } from "../../contexts/PostsContext";
-import { useHomeContext } from "../../contexts/HomeContext";
 
 export default function Dropdown({ children, postId, ownerId, onEditHandler }) {
   const { user } = useAuthContext();

@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import { useLike } from "../hooks/useLike";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import Comments from "./Comments/Comments";
+import { postComment } from "../services/postService";
 
-export default function PostCard({ post, onEditPostHandler }) {
+export default function PostCard({ post, onEditPostHandler, onCommentHandler }) {
   // Get logged in user
   const { user } = useAuthContext();
 
@@ -24,6 +25,10 @@ export default function PostCard({ post, onEditPostHandler }) {
 
   // Manage comments
   const [showComments, setShowComments] = useState(false);
+  const [comment, setComment] = useState('');
+  const onCommentSubmitHandler = () => {
+    postComment(post._id, { text: comment }).then(onCommentHandler);
+  } 
 
   // Manage edit post
   const onEditClick = () => {
@@ -106,16 +111,18 @@ export default function PostCard({ post, onEditPostHandler }) {
                     <Avatar user={user} />
                   </Link>
                 </div>
-                <div className="grow rounded-full">
+                <div className="grow rounded-full relative">
                   <textarea
                     className="border block w-full p-4 px-4 h-12 overflow-hidden rounded-3xl dark:bg-blackbg dark:border-black"
                     placeholder="Leave a comment"
+                    value={comment}
+                    onChange={e => setComment(e.target.value)}
                   />
+                <button onClick={onCommentSubmitHandler} className="absolute bottom-4 right-4 text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+                </button>
                 </div>
               </div>
-              <button className="absolute bottom-8 right-6 text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
-              </button>
             </>
           ) : null
         }

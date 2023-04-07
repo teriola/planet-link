@@ -29,6 +29,10 @@ export default function Home() {
         setIsLoading(false);
     };
 
+    const onCommentHandler = (postId, data) => {
+        setSelectedPost(state => ({ ...state, comments: [...comments, data]}));
+    }
+
     return (
         <HomeContext.Provider value={{ onEditHandler, setIsEditing, selectedPost }}>
             {isEditing &&
@@ -37,7 +41,7 @@ export default function Home() {
                 </div>}
             {user.accessToken ? <PostFormCard /> : null}
             {isLoading ? <Loading /> :
-                posts?.length > 0 ? posts.map(post => <PostCard key={post._id} onEditPostHandler={onEditHandler} post={post} />) :
+                posts?.length > 0 ? posts.map(post => <PostCard key={post._id} onCommentHandler={onCommentHandler} onEditPostHandler={onEditHandler} post={post} />) :
                     <h3 className="text-2xl text-center pt-4 dark:text-gray-400">No posts</h3>}
         </HomeContext.Provider>
     );

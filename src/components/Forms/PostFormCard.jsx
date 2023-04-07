@@ -17,7 +17,7 @@ export default function PostFormCard() {
   });
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setPostData(state => ({ ...state, [name]: value }))
+    setPostData(state => ({ ...state, [name]: value }));
   };
 
   // Get callbacks to manage post submit

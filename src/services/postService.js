@@ -42,3 +42,7 @@ export async function getComments(postId) {
     const comments = await get(`/posts/${postId}/comments`);
     return comments;
 }
+export async function postComment(postId, data) {
+    const comment = await post(`/posts/${postId}/comment`, data);
+    return comment;
+}

@@ -6,9 +6,6 @@ export default function Card({ children, noPadding, width, centered }) {
     if (width) {
         classes += ' w-3/4 md:w-1/2';
     }
-    if (centered) {
-        classes += ' flex flex-col items-center';
-    }
 
     return (
         <div className={classes}>

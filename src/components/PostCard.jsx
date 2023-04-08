@@ -25,10 +25,13 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
 
   // Manage comments
   const [showComments, setShowComments] = useState(false);
+  const closeComments = () => {
+    setShowComments(false);
+  }
   const [comment, setComment] = useState('');
   const onCommentSubmitHandler = () => {
     postComment(post._id, { text: comment }).then(onCommentHandler);
-  } 
+  }
 
   // Manage edit post
   const onEditClick = () => {
@@ -39,7 +42,7 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
     <>
       {showComments && (
         <div className="w-full h-full flex justify-center items-center fixed top-0 left-0 bg-gray-700 bg-opacity-50 z-50">
-          <Comments postId={post._id} />
+          <Comments closeComments={closeComments} postId={post._id} />
         </div>
       )}
 
@@ -118,9 +121,9 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
                     value={comment}
                     onChange={e => setComment(e.target.value)}
                   />
-                <button onClick={onCommentSubmitHandler} className="absolute bottom-4 right-4 text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
-                </button>
+                  <button onClick={onCommentSubmitHandler} className="absolute bottom-4 right-4 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"> <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /> </svg>
+                  </button>
                 </div>
               </div>
             </>

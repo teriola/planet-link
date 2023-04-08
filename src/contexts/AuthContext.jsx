@@ -18,16 +18,16 @@ export function AuthProvider({ children }) {
     const userLogoutHandler = () => {
         setUser({});
     };
-    const changeTheme = (theme) => {
-        setUser(state => ({ ...state, theme: theme }));
-    }
+    // const changeTheme = (theme) => {
+    //     setUser(state => ({ ...state, theme: theme }));
+    // }
 
     const contextValue = {
         user,
         userLoginHandler,
         userRegisterHandler,
         userLogoutHandler,
-        changeTheme,
+        // changeTheme,
     };
 
     return (

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { getBookmarksByUser } from '../services/postService';
-import Card from "../components/ui/Card";
 
 
 export default function Bookmarks() {

@@ -11,19 +11,14 @@ export function useThemeContext() {
 }
 
 export function ThemeProvider({ children }) {
-    const { user, changeTheme } = useAuthContext();
-    const [theme, setTheme] = useTheme(user.theme || 'light');
+    const { user } = useAuthContext();
+    const [theme, setTheme] = useTheme('light');
 
-    useEffect(() => {
-        if (user.theme !== undefined) {
-          setTheme(user.theme);
-        }
-    }, [user]);
 
     const toggleTheme = async (userId) => {
         const newTheme = theme == 'light' ? 'dark' : 'light';
-        await patchUser(userId, { theme: newTheme });
-        changeTheme(newTheme);
+        // await patchUser(userId, { theme: newTheme });
+        // changeTheme(newTheme);
         setTheme(newTheme);
     }
 

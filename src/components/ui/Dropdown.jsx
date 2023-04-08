@@ -7,7 +7,7 @@ import { usePostsContext } from "../../contexts/PostsContext";
 export default function Dropdown({ children, postId, ownerId, onEditHandler }) {
   const { user } = useAuthContext();
   const [isBookmarked, setIsBookmarked] = useState(() => {
-    const bookmarked = user?.bookmarks.includes(postId);
+    const bookmarked = user.bookmarks?.includes(postId);
     return bookmarked;
   });
 

@@ -11,7 +11,7 @@ import PrivateRoutes from "./utils/PrivateRoute";
 import Logout from "./pages/Logout";
 import Posts from "./components/Posts/Posts";
 import About from "./components/About/About";
-import Friends from "./components/Friends/Friends";
+import Followers from "./components/Followers/Followers";
 import Photos from "./components/Photos/Photos";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { PostsProvider } from "./contexts/PostsContext";
@@ -30,7 +30,7 @@ export default function App() {
             <Route path="/profile/:id" element={<Profile />}>
               <Route path="posts" element={<Posts />} />
               <Route path="about" element={<About />} />
-              <Route path="friends" element={<Friends />} />
+              <Route path="followers" element={<Followers />} />
               <Route path="photos" element={<Photos />} />
             </Route>
             <Route element={<PrivateRoutes />}>

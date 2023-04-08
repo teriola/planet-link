@@ -35,7 +35,7 @@ export default function App() {
             </Route>
             <Route element={<PrivateRoutes />}>
               <Route path="/:id/bookmarks" element={<Bookmarks />} />
-              <Route path="/settings" element={<Settings />} />
+              {/* <Route path="/settings" element={<Settings />} /> */}
               <Route path="/logout" element={<Logout />} exact />
             </Route>
             <Route path="/login" element={<Login />} />

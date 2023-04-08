@@ -5,7 +5,7 @@ import Bookmarks from "./pages/Bookmarks";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout/MainLayout";
-import Settings from "./pages/Settings";
+// import Settings from "./pages/Settings";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoutes from "./utils/PrivateRoute";
 import Logout from "./pages/Logout";

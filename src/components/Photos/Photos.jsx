@@ -14,8 +14,6 @@ export default function Photos() {
     getPostsByUser(id).then(posts => setUserPhotos(posts.sort((a, b) => b.likes - a.likes)));
   }, []);
 
-  console.log(userPhotos);
-
   return (
       <Card>
           <div className="grid justify-center md:grid-cols-2 gap-4">

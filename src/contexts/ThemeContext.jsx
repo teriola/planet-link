@@ -11,20 +11,12 @@ export function useThemeContext() {
 }
 
 export function ThemeProvider({ children }) {
-    const { user } = useAuthContext();
-    const [theme, setTheme] = useTheme('light');
+    const [theme, themeToggleHandler] = useTheme('light');
 
-
-    const toggleTheme = async (userId) => {
-        const newTheme = theme == 'light' ? 'dark' : 'light';
-        // await patchUser(userId, { theme: newTheme });
-        // changeTheme(newTheme);
-        setTheme(newTheme);
-    }
 
     const contextValue = {
         theme,
-        toggleTheme,
+        themeToggleHandler,
     };
 
     return (

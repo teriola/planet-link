@@ -70,7 +70,7 @@ export default function ProfilePage() {
                           </span>
                       </>
                       : null}
-                    {user._id !== currentUser._id && (
+                    {user.accessToken && user._id !== currentUser._id && (
                       <>
                         {currentUser.followers?.find(follower => follower._id === user._id) ? (
                           <h2 className='bg-blue text-white px-6 py-1 rounded-md absolute right-4 bottom-24'>Followed</h2>

@@ -29,8 +29,15 @@ export default function ProfilePage() {
     setIsEditing(false);
   };
 
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  useEffect(() => {
+    setIsFollowed(currentUser.followers?.find(follower => follower._id === user._id));
+  }, []);
+
   const onFollowClick = async (userId) => {
     await followUser(userId);
+    setIsFollowed(true);
   }
 
   const activeTab = 'flex gap-1 px-4 py-1 items-center border-blue border-b-4 text-blue font-bold';
@@ -72,9 +79,8 @@ export default function ProfilePage() {
                       : null}
                     {user.accessToken && user._id !== currentUser._id && (
                       <>
-                        {currentUser.followers?.find(follower => follower._id === user._id) ? (
-                          <h2 className='bg-blue text-white px-6 py-1 rounded-md absolute right-4 bottom-24'>Followed</h2>
-                        ) : (
+                        {isFollowed ?
+                          <h2 className='bg-blue text-white px-6 py-1 rounded-md absolute right-4 bottom-24'>Followed</h2> : (
                           <button
                             onClick={() => onFollowClick(currentUser._id)}
                             className="bg-blue text-white px-6 py-1 rounded-md absolute right-4 bottom-24">

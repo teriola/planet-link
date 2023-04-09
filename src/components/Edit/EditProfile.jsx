@@ -16,6 +16,7 @@ export default function EditProfile({ onCloseEdit, onEditHandler }) {
       surname: user.surname,
       profilePicture: user.profilePicture,
       coverPicture: user.coverPicture,
+      description: user.description,
     }
   });
 
@@ -69,6 +70,13 @@ export default function EditProfile({ onCloseEdit, onEditHandler }) {
             aria-invalid={errors.surname ? 'true' : 'false'}
           />
         </div>
+        <textarea 
+          className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
+          name="description"
+          placeholder="Today I did..."
+          {...register('description')}
+          aria-invalid={errors.description ? 'true' : 'false'}
+        />
         {/* Profile picture and validation */}
         {errors.profilePicture?.type === 'required' && <span className="text-sm absolute top-8 left-2 text-red-500">Profile picture is required</span>}
         <input

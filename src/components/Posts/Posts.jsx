@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PostCard from '../PostCard';
-import { getPostsByUser } from '../../services/postService';
+import { getUserPosts } from '../../services/postService';
 import { useParams } from 'react-router-dom';
 import Loading from '../ui/Loading';
 import { useProfileContext } from '../../contexts/ProfileContext';
@@ -12,7 +12,7 @@ export default function Posts() {
   const { isLoading, setIsLoading } = useProfileContext();
 
   useEffect(() => {
-    getPostsByUser(id).then(posts => setUserPosts(posts.sort((a, b) => b.likes - a.likes)));
+    getUserPosts(id).then(posts => setUserPosts(posts.sort((a, b) => b.likes - a.likes)));
   }, []);
 
 

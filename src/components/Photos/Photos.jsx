@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Loading from '../ui/Loading';
 import Card from '../ui/Card';
 import { useProfileContext } from '../../contexts/ProfileContext';
-import { getPostsByUser } from '../../services/postService';
+import { getUserPosts } from '../../services/postService';
 
 export default function Photos() {
   const [userPhotos, setUserPhotos] = useState([]);
@@ -11,7 +11,7 @@ export default function Photos() {
   const { isLoading } = useProfileContext();
 
   useEffect(() => {
-    getPostsByUser(id).then(posts => setUserPhotos(posts.sort((a, b) => b.likes - a.likes)));
+    getUserPosts(id).then(posts => setUserPhotos(posts.sort((a, b) => b.likes - a.likes)));
   }, []);
 
   return (

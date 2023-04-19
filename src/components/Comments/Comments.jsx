@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../ui/Card";
-import { getComments } from "../../services/postService";
+import { getPostComments } from "../../services/postService";
 import { Link } from "react-router-dom";
 import Avatar from "../ui/Avatar";
 import Loading from "../ui/Loading";
@@ -10,7 +10,7 @@ export default function Comments({ postId, closeComments }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getComments(postId).then(setComments);
+        getPostComments(postId).then(setComments);
         setIsLoading(false);
     }, [postId]);
 

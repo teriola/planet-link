@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createPost, editPost, getAllPosts } from "../services/postService";
-import { deletePost } from "../services/postService";
+import { removePost } from "../services/postService";
 
 export const PostsContext = createContext();
 
@@ -27,7 +27,7 @@ export const PostsProvider = ({ children }) => {
   };
   // Delete post 
   const onDeleteHandler = async (postId) => {
-    const { id } = await deletePost(postId);
+    const { id } = await removePost(postId);
     setPosts(state => state.filter(x => x._id !== id));
   };
   // Edit post

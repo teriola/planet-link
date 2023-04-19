@@ -1,15 +1,7 @@
 import { get, post } from "./requester";
 
-export async function login(email, password) {
-  const data = await post('/users/login', { email, password });
-  return data;
-};
+export const login = (email, password) => post('/auth/login', { email, password });
 
-export async function register({ email, password, rePassword, name, surname }) {
-  const data = await post('/users', { email, password, rePassword, name, surname });
-  return data;
-}
+export const register = ({ email, password, rePassword, name, surname }) => post('/auth/register', { email, password, rePassword, name, surname });
 
-export async function logout() {
-  get ('/users/logout');
-}
+export const logout = () => get ('/auth/logout');

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import { getBookmarksByUser } from '../services/postService';
+import { getUserBookmarks } from '../services/postService';
 
 
 export default function Bookmarks() {
   const id = useParams().id;
   const [bookbarks, setBookmarks] = useState({});
   useEffect(() => {
-    getBookmarksByUser(id).then(setBookmarks);
+    getUserBookmarks(id).then(setBookmarks);
   }, [id]);
 
   return (

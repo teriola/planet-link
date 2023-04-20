@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://social-media-api.onrender.com';
 
 async function request(method, path, data) {
   const options = {

@@ -15,8 +15,6 @@ export default function Posts() {
     getUserPosts(id).then(posts => setUserPosts(posts.sort((a, b) => b.likes - a.likes)));
   }, []);
 
-  console.log(userPosts);
-
   const onEditSubmitHandler = async (data) => {
     setIsLoading(true);
 

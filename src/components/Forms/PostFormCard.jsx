@@ -9,7 +9,6 @@ import { usePostsContext } from "../../contexts/PostsContext";
 export default function PostFormCard() {
   // Get logged in user
   const { user } = useAuthContext();
-  console.log(user);
 
   // Handle form data
   const [postData, setPostData] = useState({

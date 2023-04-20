@@ -44,7 +44,7 @@ export default function ProfilePage() {
   const nonActiveTab = 'flex gap-1 px-4 py-2 items-center border-b-4 border-b-white dark:border-graybg';
 
   return (
-    <ProfileContext.Provider value={{ user: currentUser, isLoading, setIsLoading, setIsLoading }}>
+    <ProfileContext.Provider value={{ user: currentUser, isLoading, setIsLoading }}>
       {isEditing ? (
         <div className='fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75'>
           <EditProfile onEditHandler={onEditHandler} onCloseEdit={setIsEditing} oldUserData={currentUser} />

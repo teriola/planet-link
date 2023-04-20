@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useAuthContext } from "../../../contexts/AuthContext";
+import { register as registerUser } from "../../../services/authService";
 import { useForm } from "react-hook-form";
-import { register } from "../../../services/authService";
 import { useState } from "react";
 
 export default function RegisterForm() {
@@ -22,7 +22,7 @@ export default function RegisterForm() {
         if (password !== rePassword) return;
 
         try {
-            const user = await register({ email, password, rePassword, name, surname });
+            const user = await registerUser({ email, password, rePassword, name, surname });
 
             userRegisterHandler(user);
             setIsLoading(false);

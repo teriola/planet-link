@@ -1,4 +1,4 @@
-const baseUrl = 'https://social-media-api-q500.onrender.com';
+const baseUrl = 'https://planet-link-api.onrender.com';
 
 async function request(method, path, data) {
   const options = {

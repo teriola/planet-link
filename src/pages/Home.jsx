@@ -12,19 +12,19 @@ export default function Home() {
 
     const { posts, onEditPostHandler, setIsLoading, isLoading } = usePostsContext();
     const [isEditing, setIsEditing] = useState(false);
-    const [selectedPost, setselectedpost] = useState(null);
+    const [selectedPost, setSelectedPost] = useState(null);
 
     const onEditHandler = (post) => {
         setIsEditing(true);
-        setselectedpost(post);
+        setSelectedPost(post);
     };
 
-    const oneditsubmithandler = (data) => {
+    const onEditSubmitHandler = (data) => {
         setIsLoading(true);
 
-        onEditPostHandler(selectedpost._id, data);
+        onEditPostHandler(selectedPost._id, data);
         setIsEditing(false);
-        setselectedpost(null);
+        setSelectedPost(null);
 
         setIsLoading(false);
     };

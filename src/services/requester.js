@@ -7,7 +7,7 @@ async function request(method, path, data) {
   };
   const userData = localStorage.getItem('auth');
 
-  if (userData) {
+  if (userData?.accessToken) {
     options.headers['X-Authorization'] = JSON.parse(userData).accessToken;
   }
 

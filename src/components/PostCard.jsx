@@ -85,7 +85,7 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
           <div className="grow rounded-md w-full overflow-hidden">
             <img
               className="w-full"
-              src={post.picture}
+              src={post.image}
               // src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpbnFSv2TiYBCO6Atfgeilxj03DIwLjmPFIA&usqp=CAU"
               alt="post"
             />

@@ -5,7 +5,6 @@ import Bookmarks from "./pages/Bookmarks";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout/MainLayout";
-// import Settings from "./pages/Settings";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoutes from "./utils/PrivateRoute";
 import Logout from "./pages/Logout";
@@ -35,7 +34,6 @@ export default function App() {
             </Route>
             <Route element={<PrivateRoutes />}>
               <Route path="/:id/bookmarks" element={<Bookmarks />} />
-              {/* <Route path="/settings" element={<Settings />} /> */}
               <Route path="/logout" element={<Logout />} exact />
             </Route>
             <Route path="/login" element={<Login />} />

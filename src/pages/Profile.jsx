@@ -88,7 +88,8 @@ export default function ProfilePage() {
                     </div>
                 </div>
             </Card>
-            {/*<Outlet context={onFollowClick} />*/}
+            <Outlet />
+{/*context={onFollowClick}*/}
         </ProfileContext.Provider>
     );
 }

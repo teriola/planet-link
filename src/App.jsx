@@ -29,7 +29,7 @@ export default function App() {
                         <Route path="/profile/:id" element={<Profile />}>
                             <Route path="posts" element={<Posts />} />
                             <Route path="about" element={<About />} />
-                            <Route path="followers" element={<Followers />} />
+                            {/*<Route path="followers" element={<Followers />} />*/}
                             <Route path="photos" element={<Photos />} />
                         </Route>
                         <Route element={<PrivateRoutes />}>

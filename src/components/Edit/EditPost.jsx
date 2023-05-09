@@ -44,7 +44,7 @@ export default function EditPost({ onCloseEdit, onEditSubmitHandler }) {
                     {errors.text?.type === 'maxLength' && <span className="text-sm absolute -top-6 left-0 md:left-2 text-red-500">Max length is 300</span>}
                     <label className="block" htmlFor="text"></label>
                     {/* value={postData.text}
-                        onChange={onChangeHandler} */}
+onChange={onChangeHandler} */}
                     <textarea
                         className="grow p-3 h-14 dark:bg-blackbg"
                         id="text"

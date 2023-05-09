@@ -28,7 +28,7 @@ export default function RegisterForm() {
             setIsLoading(false);
             navigate(`/profile/${user._id}/posts`);
         } catch (err) {
-          console.log(err);
+            console.log(err);
             if (err.message) {
                 setError('server', {
                     type: 'server',

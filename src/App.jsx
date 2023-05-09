@@ -16,31 +16,31 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { PostsProvider } from "./contexts/PostsContext";
 
 export default function App() {
-  return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={
-              <PostsProvider>
-                <Home />
-              </PostsProvider>
-            } />
-            <Route path="/profile/:id" element={<Profile />}>
-              <Route path="posts" element={<Posts />} />
-              <Route path="about" element={<About />} />
-              <Route path="followers" element={<Followers />} />
-              <Route path="photos" element={<Photos />} />
-            </Route>
-            <Route element={<PrivateRoutes />}>
-              <Route path="/:id/bookmarks" element={<Bookmarks />} />
-              <Route path="/logout" element={<Logout />} exact />
-            </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </Layout>
-      </ThemeProvider>
-    </AuthProvider >
-  );
+    return (
+        <AuthProvider>
+            <ThemeProvider>
+                <Layout>
+                    <Routes>
+                        <Route path="/" element={
+                            <PostsProvider>
+                                <Home />
+                            </PostsProvider>
+                        } />
+                        <Route path="/profile/:id" element={<Profile />}>
+                            <Route path="posts" element={<Posts />} />
+                            <Route path="about" element={<About />} />
+                            <Route path="followers" element={<Followers />} />
+                            <Route path="photos" element={<Photos />} />
+                        </Route>
+                        <Route element={<PrivateRoutes />}>
+                            <Route path="/:id/bookmarks" element={<Bookmarks />} />
+                            <Route path="/logout" element={<Logout />} exact />
+                        </Route>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                    </Routes>
+                </Layout>
+            </ThemeProvider>
+        </AuthProvider >
+    );
 }

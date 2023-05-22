@@ -52,7 +52,7 @@ export default function EditPost({ onCloseEdit, onEditSubmitHandler }) {
                         type="text"
                         placeholder="What's on your mind?"
                         {...register('text', { required: true, maxLength: 300 })}
-                        aria-invalid={errors.name ? 'true' : 'false'}
+                        aria-invalid={errors.text ? 'true' : 'false'}
                     />
 
                     {/* Picture and validation */}
@@ -64,7 +64,7 @@ export default function EditPost({ onCloseEdit, onEditSubmitHandler }) {
                         name="picture"
                         type="url"
                         {...register('picture', { required: true })}
-                        aria-invalid={errors.surname ? 'true' : 'false'}
+                        aria-invalid={errors.picture ? 'true' : 'false'}
                     />
                     <span className="text-sm absolute top-48 left-2 text-red-500">{errors.server && errors.server.message}</span>
                     <input

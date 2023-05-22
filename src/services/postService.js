@@ -3,7 +3,7 @@ import { post, get, remove, put } from "./requester";
 // GET
 export const getAllPosts = () => get('/posts');
 export const getUserPosts = (userId) => get(`/posts/user/${userId}`);
-export const getUserBookmarks = () => get('/posts/bookmarks');
+export const getUserBookmarks = (id) => get(`/posts/bookmark/${id}`);
 export const getPostComments = (postId) => get(`/posts/${postId}/comments`);
 
 // POST

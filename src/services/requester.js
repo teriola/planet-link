@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000';
+const baseUrl = import.meta.env.BASE_URL || 'http://localhost:3000';
 
 async function request(method, path, data) {
   const options = {

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createPost, editPost, getAllPosts } from "../services/postService";
 import { removePost } from "../services/postService";
+import { useAuthContext } from "./AuthContext";
 
 export const PostsContext = createContext();
 
@@ -10,19 +11,21 @@ export const usePostsContext = () => {
 
 export const PostsProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { user } = useAuthContext();
 
   useEffect(() => {
     getAllPosts()
       .then(posts => {
-        setPosts(posts.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+        setPosts(posts.sort((a, b) => b.createdOn.localeCompare(a.createdOn)));
         setIsLoading(false); 
       });
   }, []);
 
   // Create new post 
   const onAddPostHandler = async (post) => {
-    const newPost = await createPost(post.text, post.picture);
+    const newPost = await createPost(post.text, post.picture, user._id);
     setPosts(state => [newPost, ...state]);
   };
   // Delete post 

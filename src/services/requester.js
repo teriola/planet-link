@@ -1,4 +1,5 @@
-const baseUrl = import.meta.env.BASE_URL || 'http://localhost:3000';
+const baseUrl = 'http://localhost:3000'; 
+// import.meta.env.BASE_URL || 
 
 async function request(method, path, data) {
   const options = {
@@ -6,9 +7,9 @@ async function request(method, path, data) {
     headers: {},
   };
   const userData = localStorage.getItem('auth');
-
+  
   if (userData) {
-    options.headers['authorization'] = JSON.parse(userData).accessToken;
+    options.headers['x-authorization'] = JSON.parse(userData).accessToken;
   }
 
   if (data) {

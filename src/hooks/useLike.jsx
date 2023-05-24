@@ -4,16 +4,16 @@ import { likePost, unlikePost } from "../services/postService";
 export function useLike(post, userId){
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(() => {
-    return post.likedUsers.includes(userId);
+    return post.likes.includes(userId);
   });
-
-  const onLikeClick = async () => {
-    if(liked){
+  console.log(likes);
+  const onLikeClick = async (userId) => {
+    if(likes.includes(userId)){
       await unlikePost(post._id);
-      setLikes(likes => likes - 1);
+      setLikes(likes => likes.filter(x => x != userId));
     }else{
       await likePost(post._id);
-      setLikes(likes => likes + 1);
+      setLikes(likes => [...likes, userId]);
     }
     setLiked(!liked);
   };

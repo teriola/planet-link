@@ -17,12 +17,12 @@ export default function RegisterForm() {
     } = useForm();
 
     const onSubmit = async (data) => {
-        const { email, password, repeatPassword, name, surname } = data;
+        const { email, password, rePassword, name, surname } = data;
         setIsLoading(true);
-        if (password !== repeatPassword) return;
+        if (password !== rePassword) return;
 
         try {
-            const user = await registerUser({ email, password, repeatPassword, name, surname });
+            const user = await registerUser({ email, password, rePassword, name, surname });
 
             userRegisterHandler(user);
             setIsLoading(false);
@@ -87,20 +87,20 @@ export default function RegisterForm() {
                 aria-invalid={errors.password ? 'true' : 'false'}
             />
             {/* Confirm password validation */}
-            {errors.repeatPassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
-            {errors.repeatPassword?.type === 'validate' && <span className="text-sm absolute bottom-44 left-2 text-red-500"></span>}
+            {errors.rePassword?.type === 'required' && <span className="text-sm absolute top-36 left-2 text-red-500">Password is required</span>}
+            {errors.rePassword?.type === 'validate' && <span className="text-sm absolute bottom-44 left-2 text-red-500"></span>}
             <input
                 className="border rounded-lg px-3 py-1 border-gray-300 dark:text-blacktext"
-                name="repeatPassword"
+                name="rePassword"
                 type="password"
                 placeholder="Repeat password"
-                {...register('repeatPassword', {
+                {...register('rePassword', {
                     required: true, validate: (value) => {
                         const { password } = getValues();
                         return password === value || 'Passwords don\'t match';
                     }
                 })}
-                aria-invalid={errors.repeatPassword ? 'true' : 'false'}
+                aria-invalid={errors.rePassword ? 'true' : 'false'}
             />
             <span className="text-sm absolute top-48 left-2 text-red-500">{errors.server && errors.server.message}</span>
             <input

@@ -22,7 +22,7 @@ export default function Photos() {
                   userPhotos?.length > 0 ? 
                   userPhotos.map(photo => (
                   <div key={photo._id} className="justify-center rounded-md overflow-hidden h-48 flex items-center shadow-md">
-                      <img src={photo.picture} alt="photo" />
+                      <img src={photo.image} alt="photo" />
                   </div>
                   )) : null}
           </div>

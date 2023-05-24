@@ -26,8 +26,8 @@ export default function Comments({ postId, closeComments }) {
                           comments.map(comment => (
                                 <div key={comment._id} className="w-3/4 flex items-center gap-4">
                                     <div>
-                                        <Link to={`/profile/${comment._owner._id}/posts`} className="cursor-pointer">
-                                            <Avatar user={comment._owner} />
+                                        <Link to={`/profile/${comment.owner._id}/posts`} className="cursor-pointer">
+                                            <Avatar user={comment.owner} />
                                         </Link>
                                     </div>
                                     <div className="grow rounded-full">

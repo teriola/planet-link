@@ -6,6 +6,7 @@ export default function Avatar({ size, user, isEditing }) {
     height = 'h-24 md:h-36';
   }
 
+
   return (
     <div className={`${width} ${height} inline-block rounded-full overflow-hidden`}>
       <img

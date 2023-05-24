@@ -8,7 +8,7 @@ export function useAuthContext() {
 }
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useLocalStorage('auth', {});
+    const [user, setUser, removeUser] = useLocalStorage('auth', {});
     const userLoginHandler = (userData) => {
         setUser(userData);
     };
@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
         setUser(userData);
     };
     const userLogoutHandler = () => {
-        setUser({});
+        removeUser();
     };
     // const changeTheme = (theme) => {
     //     setUser(state => ({ ...state, theme: theme }));

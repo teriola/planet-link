@@ -12,5 +12,9 @@ export default function useLocalStorage(key, initialData) {
         localStorage.setItem(key, JSON.stringify(value));
     };
 
-    return [state, setLocalStorage];
+    const removeLocalStorage = () => {
+        localStorage.removeItem(key);
+    }
+
+    return [state, setLocalStorage, removeLocalStorage];
 };

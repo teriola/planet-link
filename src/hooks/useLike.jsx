@@ -6,7 +6,7 @@ export function useLike(post, userId){
   const [liked, setLiked] = useState(() => {
     return post.likes.includes(userId);
   });
-  console.log(likes);
+
   const onLikeClick = async (userId) => {
     if(likes.includes(userId)){
       await unlikePost(post._id);

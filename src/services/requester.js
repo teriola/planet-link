@@ -1,34 +1,34 @@
-const baseUrl = 'https://planet-link-api.onrender.com'; 
+const baseUrl = 'http://localhost:3000'; 
 // import.meta.env.BASE_URL || 
 
 async function request(method, path, data) {
-  const options = {
-    method,
-    headers: {},
-  };
-  const userData = localStorage.getItem('auth');
-  
-  if (userData) {
-    options.headers['x-authorization'] = JSON.parse(userData).accessToken;
-  }
+    const options = {
+        method,
+        headers: {},
+    };
+    const userData = localStorage.getItem('auth');
 
-  if (data) {
-    options.headers['content-type'] = 'application/json';
-    options.body = JSON.stringify(data);
-  }
-
-  try {
-    const res = await fetch(baseUrl + path, options);
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw ({ server: true, message: data.message });
+    if (userData) {
+        options.headers['x-authorization'] = JSON.parse(userData).accessToken;
     }
 
-    return data;
-  } catch (err) {
-    throw new Error(err.message);
-  }
+    if (data) {
+        options.headers['content-type'] = 'application/json';
+        options.body = JSON.stringify(data);
+    }
+
+    try {
+        const res = await fetch(baseUrl + path, options);
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw ({ server: true, message: data.message });
+        }
+
+        return data;
+    } catch (err) {
+        throw new Error(err);
+    }
 }
 
 export const get = request.bind(null, 'GET');

@@ -31,6 +31,7 @@ export const PostsProvider = ({ children }) => {
   // Delete post 
   const onDeleteHandler = async (postId) => {
     const { id } = await removePost(postId);
+    console.log(posts);
     setPosts(state => state.filter(x => x._id !== id));
   };
   // Edit post

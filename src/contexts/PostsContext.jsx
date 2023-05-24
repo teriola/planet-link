@@ -18,7 +18,7 @@ export const PostsProvider = ({ children }) => {
   useEffect(() => {
     getAllPosts()
       .then(posts => {
-        setPosts(posts.sort((a, b) => b.createdOn.localeCompare(a.createdOn)));
+        setPosts(posts.sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
         setIsLoading(false); 
       });
   }, []);

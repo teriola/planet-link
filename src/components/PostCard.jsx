@@ -14,7 +14,7 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
   const { user } = useAuthContext();
 
   // Destructure data from post's owner
-  const { name, surname, profilePicture, _id, createdOn } = post.owner;
+  const { name, surname, profilePicture, _id, createdAt } = post.owner;
 
   // Dropdown menu on post
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -59,7 +59,7 @@ export default function PostCard({ post, onEditPostHandler, onCommentHandler }) 
               {' '}posted a <a href="#" className="text-blue">photo</a>
             </p>
             <p>
-              <a className="text-gray-500 text-sm">{createdOn}</a>
+              <a className="text-gray-500 text-sm">{createdAt}</a>
             </p>
           </div>
           {user.accessToken ? (

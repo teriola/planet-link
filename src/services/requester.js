@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000'; 
+const baseUrl = 'https://planet-link-api.onrender.com'; 
 // import.meta.env.BASE_URL || 
 
 async function request(method, path, data) {

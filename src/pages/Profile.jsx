@@ -17,6 +17,7 @@ export default function ProfilePage() {
     useEffect(() => {
         getUserById(id).then((user) => {
             setUser(user);
+            console.log(user);
             setIsLoading(false);
         });
     }, [id]);

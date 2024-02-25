@@ -1,4 +1,4 @@
-# NOTE Site is currently not working because of server change
+NOTE: SITE TEMPORARILY DOESN'T WORK CORRECTLY BECAUSE OF SERVER CHANGE 
 
 # Planet Link React Website
 

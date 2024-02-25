@@ -1,3 +1,5 @@
+# NOTE Site is currently not working because of server change
+
 # Planet Link React Website
 
 Welcome to the Planet Link React website! This website was built using Vite and React, and it uses MongoDB Atlas as a database. The website fetches data from an Express server that is hosted on https://planet-link-api.onrender.com.
